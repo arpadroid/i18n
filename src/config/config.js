@@ -11,4 +11,4 @@ export const DEFAULT_LANGUAGE_OPTIONS = [
 
 export const DEFAULT_LOCALE = 'en-gb';
 
-export const LANGUAGES_PATH = '/lang/';
+export const LANGUAGES_PATH = 'lang/';

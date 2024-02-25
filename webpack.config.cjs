@@ -3,7 +3,7 @@ const MODE = argv.mode === 'production' ? 'production' : 'development';
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const CopyPlugin = require('copy-webpack-plugin');
 module.exports = (async () => {
     return [
         {
@@ -55,6 +55,14 @@ module.exports = (async () => {
                 new webpack.optimize.ModuleConcatenationPlugin(),
                 new webpack.DefinePlugin({
                     APPLICATION_MODE: JSON.stringify(MODE)
+                }),
+                new CopyPlugin({
+                    patterns: [
+                        {
+                            from: 'src/lang',
+                            to: 'lang'
+                        },
+                    ]
                 })
             ]
         }

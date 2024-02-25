@@ -33,6 +33,9 @@
     "components": {},
     "contexts": {},
     "modules": {
+        "user": {
+            "txtWelcome": "Welcome {name}, today is {date}!"
+        },
         "list": {
             "txtNoResults": "No results found for {result}.",
             "txtSearchResults": "Found {resultCount} search results for {result}.",

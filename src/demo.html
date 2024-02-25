@@ -4,9 +4,13 @@
         <title>i18n Demo</title>
     </head>
     <body>
+        <i18n-text key="modules.user.txtWelcome" replacements="name:John Smith,date:Monday"/>
         <script type="module">
-            import { I18n } from './arpadroid-i18n.js';
-            console.log('i18n', I18n);
+            import { I18n, I18nText } from './arpadroid-i18n.js';
+            const i18n = I18n.getInstance();
+            setTimeout(() => {                
+                i18n.setLocale('es');
+            }, 4000);
         </script>
     </body>
 </html>

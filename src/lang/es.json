@@ -32,6 +32,9 @@
     "components": {},
     "contexts": {},
     "modules": {
+        "user": {
+            "txtWelcome": "Bienvenido {name}, hoy es {date}!"
+        },
         "list": {
             "txtNoResults": "No se encontraron resultados para {result}.",
             "txtSearchResults": "Se encontraron {resultCount} resultados de búsqueda para {result}.",

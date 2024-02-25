@@ -6,51 +6,74 @@ export let LOCALE = DEFAULT_LOCALE;
 
 /**
  * Locale Option interface for the language selection.
- * @typedef {object} LocaleOption
+ * @typedef {object} LocaleOptionInterface
  * @property {string} label - The label for the language.
  * @property {string} value - The value for the language.
  * @property {string} [flag] - The flag for the language.
  * @property {string} [icon] - The icon for the language.
  * @property {string} [country] - The country for the language.
  * @property {string} [language] - The language for the language.
+ * @property {string} [file] - The file for the language.
  */
 
 /**
- * The form configuration.
+ * The I18n instance configuration.
  * @typedef {object} i18nInterface
  * @property {Record<string, unknown>} [payload] - The language payload.
- * @property {string} [language] - The selected language string.
- * @property {string} [defaultLanguage] - The default selected language.
+ * @property {string} [locale] - The currently selected language code.
+ * @property {string} [defaultLocale] - The default language code.
  * @property {string} [path] - The path to the language files.
- * @property {Record<string, LocaleOption>} localeOptions - Default locale list for user selection.
- * @export i18nInterface 
+ * @property {Record<string, LocaleOptionInterface>} localeOptions - Default locale list for user selection.
+ * @property {string} [urlParam] - The URL parameter for the language.
  */
 
 /**
- * The I18nService class is responsible for managing the application locale.
- * @typedef {I18nService}
- * @class I18nService
+ * The I18n service class is responsible for managing the application locale.
+ * It is used to fetch, store and switch the language.
+ * It should be used as a singleton.
  */
 class I18n {
-    /** @type {i18nInterface} _defaultConfig */
+
+    static _instance;
+    /**
+     * Returns the instance of the I18n service.
+     * @returns {I18n}
+     */
+    static getInstance() {
+        if (!this._instance) {
+            this._instance = new I18n();
+        }
+        return this._instance;
+    }
+
+    /** @property {i18nInterface} _defaultConfig - The default config. */
     _defaultConfig = {
         path: LANGUAGES_PATH,
         defaultLocale: DEFAULT_LOCALE,
         locale: DEFAULT_LOCALE,
         payload: DEFAULT_LANGUAGE,
-        localeOptions: DEFAULT_LANGUAGE_OPTIONS
+        localeOptions: DEFAULT_LANGUAGE_OPTIONS,
+        urlParam: 'language'
     };
-    /** @type {i18nInterface} _config */
+    /** @type {i18nInterface} _config - The configuration. */
     _config = {};
-    
 
     /** @property {string} defaultLocale - The default application locale. */
     static defaultLocale = DEFAULT_LOCALE;
 
-    /** @type {(property: string, value: unknown) => void} signal */
+    /**
+     * @function signal - Emits a signal.
+     * @param {string} signalName
+     * @param {unknown} payload - The payload to send with the signal.
+     */
+
     signal;
 
-    /** @type {(property: string, callback: () => unknown) => () => void} listen */
+    /**
+     * @function listen - Listens for a signal.
+     * @param {string} signalName - The signal to listen for.
+     * @param {Function} callback - The callback function.
+     */
     listen;
 
     /**
@@ -58,6 +81,7 @@ class I18n {
      * @param {i18nInterface} config
      */
     constructor(config) {
+        I18n._instance = this;
         ObserverTool.mixin(this);
         this.setConfig(config);
     }
@@ -73,8 +97,10 @@ class I18n {
      * Set the configuration for the service.
      * @param {i18nInterface} config
      */
-    setConfig(config) {
+    setConfig(config = {}) {
+        /** @type {i18nInterface} */
         this._config = mergeObjects(this._defaultConfig, config);
+        
         if (this._config?.locale) {
             LOCALE = this._config.locale;
         }
@@ -90,7 +116,7 @@ class I18n {
 
     /**
      * Returns the locale options.
-     * @returns {Record<string, LocaleOption>}
+     * @returns {Record<string, LocaleOptionInterface>}
      */
     getLocaleOptions() {
         return this._config.localeOptions;
@@ -131,8 +157,8 @@ class I18n {
     /**
      * The default locale payload.
      * @param {string} path
-     * @param {Record<string, any>} payload
-     * @returns {Record<string, any>}
+     * @param {Record<string, unknown>} payload
+     * @returns {Record<string, unknown>}
      */
     static getDefaultPayload(path, payload) {
         const defaultPayload = getPropertyValue(path, DEFAULT_LANGUAGE, {});
@@ -146,7 +172,7 @@ class I18n {
     }
     /**
      * Adds the 'common' payload to the requested item payload.
-     * @param {Record<string, any>} payload
+     * @param {Record<string, unknown>} payload
      * @param {string} path
      */
     static addCommonPayload(payload, path) {
@@ -164,15 +190,15 @@ class I18n {
     }
 
     /**
-     * Returns the query string locale value from the URL.
+     * Returns the locale value in the URL query string.
      * @returns {string}
      */
     getURLocale() {
-        return getURLParam('language');
+        return getURLParam(this._config?.urlParam);
     }
 
     /**
-     * Preprocesses the locale.
+     * Normalizes a locale string.
      * @param {string} locale
      * @returns {string}
      */
@@ -274,9 +300,9 @@ class I18n {
     }
 
     /**
-     * Checks id the language exists in languageOptions.
+     * Checks if the given locale is supported by checking against localeOptions.
      * @param {string} locale
-     * @param {[]} options
+     * @param {LocaleOptionInterface[]} options
      * @returns {boolean}
      */
     supportsLocale(locale, options = this._config.localeOptions) {

@@ -1,0 +1,85 @@
+{
+    "common": {
+        "errors": {},
+        "labels": {
+            "lblSearch": "Search",
+            "lblSubmit": "Submit",
+            "lblEmail": "Email",
+            "lblUpload": "Upload",
+            "lblName": "Name",
+            "lblPassword": "Password",
+            "lblConfirmPassword": "Confirm Password",
+            "lblAddFile": "Add File",
+            "lblAddImage": "Add Image",
+            "lblAdd": "Add",
+            "lblRemove": "Remove",
+            "lblCancel": "Cancel",
+            "lblSave": "Save",
+            "lblEdit": "Edit",
+            "lblDelete": "Delete",
+            "lblClose": "Close",
+            "lblYes": "Yes",
+            "lblNo": "No",
+            "lblOk": "Ok",
+            "lblBack": "Back",
+            "lblNext": "Next",
+            "lblFinish": "Finish",
+            "lblLoading": "Loading"
+        },
+        "messages": {},
+        "placeholders": {},
+        "tooltips": {}
+    },
+    "components": {},
+    "contexts": {},
+    "modules": {
+        "list": {
+            "txtNoResults": "No results found for {result}.",
+            "txtSearchResults": "Found {resultCount} search results for {result}.",
+            "txtAllResults": "Showing {pageCount} out of {resultCount} results."
+        },
+        "form": {
+            "field": {
+                "errRequired": "This field is required.",
+                "errEmail": "Please provide a valid email address.",
+                "errMin": "Please provide a value greater than or equal to {0}.",
+                "errMax": "Please provide a value less than or equal to {0}.",
+                "errMinLength": "Please provide at least {minLength} characters.",
+                "errMaxLength": "Please provide no more than {maxLength} characters.",
+                "errPattern": "Please provide a value matching the pattern {0}.",
+                "errUnique": "This value is already taken.",
+                "errUrl": "Please provide a valid URL.",
+                "errNumber": "Please provide a number.",
+                "errDigits": "Please provide only digits.",
+                "errEqualTo": "Please provide the same value again.",
+                "errSize": "Please provide a value between {minLength} and {maxLength} characters long.",
+                "errRange": "Please provide a value between {0} and {1}.",
+                "errStep": "Please provide a multiple of {0}.",
+                "errLength": "Please provide {length} characters.",
+                "errColor": "Please provide a valid color.",
+                "lblPleaseSelect": "Please select"
+            },
+            "fields": {
+                "file": {
+                    "errExtensions": "The file {file} is invalid, allowed file types are: {extensions}",
+                    "errMaxSize": "The file size for {file} ({size}) exceeds the maximum upload size of {minSize}",
+                    "errMinSize": "The file size for {file} ({size}) needs to be at least {maxSize}",
+                    "lblAddFile": "Add File"
+                },
+                "image": {
+                    "lblAddFile": "Add Image"
+                },
+                "email": {
+                    "errRegex": "Please provide a valid email address"
+                },
+                "password": {
+                    "errRegex": "The password must contain at least 8 characters, one upper-case letter, one lower-case letter, and one number",
+                    "lblConfirmPassword": "Confirm Password",
+                    "lblPassword": "Password",
+                    "errPasswordMatch": "The passwords do not match"
+                }
+            }
+        }
+    },
+    "services": {}
+}

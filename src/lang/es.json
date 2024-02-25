@@ -1,0 +1,84 @@
+{
+    "common": {
+        "labels": {
+            "lblSearch": "Buscar",
+            "lblSubmit": "Enviar",
+            "lblEmail": "Correo electrónico",
+            "lblUpload": "Subir",
+            "lblName": "Nombre",
+            "lblPassword": "Contraseña",
+            "lblConfirmPassword": "Confirmar contraseña",
+            "lblAddFile": "Agregar archivo",
+            "lblAddImage": "Agregar imagen",
+            "lblAdd": "Agregar",
+            "lblRemove": "Eliminar",
+            "lblCancel": "Cancelar",
+            "lblSave": "Guardar",
+            "lblEdit": "Editar",
+            "lblDelete": "Eliminar",
+            "lblClose": "Cerrar",
+            "lblYes": "Sí",
+            "lblNo": "No",
+            "lblOk": "Aceptar",
+            "lblBack": "Atrás",
+            "lblNext": "Siguiente",
+            "lblFinish": "Finalizar",
+            "lblLoading": "Cargando"
+        },
+        "messages": {},
+        "placeholders": {},
+        "tooltips": {}
+    },
+    "components": {},
+    "contexts": {},
+    "modules": {
+        "list": {
+            "txtNoResults": "No se encontraron resultados para {result}.",
+            "txtSearchResults": "Se encontraron {resultCount} resultados de búsqueda para {result}.",
+            "txtAllResults": "Mostrando {pageCount} de {resultCount} resultados."
+        },
+        "form": {
+            "field": {
+                "errRequired": "Este campo es obligatorio.",
+                "errEmail": "Por favor, proporciona una dirección de correo electrónico válida.",
+                "errMin": "Por favor, proporciona un valor mayor o igual a {0}.",
+                "errMax": "Por favor, proporciona un valor menor o igual a {0}.",
+                "errMinLength": "Por favor, proporciona al menos {minLength} caracteres.",
+                "errMaxLength": "Por favor, proporciona como máximo {maxLength} caracteres.",
+                "errPattern": "Por favor, proporciona un valor que coincida con el patrón {0}.",
+                "errUnique": "Este valor ya está en uso.",
+                "errUrl": "Por favor, proporciona una URL válida.",
+                "errNumber": "Por favor, proporciona un número.",
+                "errDigits": "Por favor, proporciona solo dígitos.",
+                "errEqualTo": "Por favor, proporciona el mismo valor nuevamente.",
+                "errSize": "Por favor, proporciona un valor de entre {minLength} y {maxLength} caracteres.",
+                "errRange": "Por favor, proporciona un valor entre {0} y {1}.",
+                "errStep": "Por favor, proporciona un múltiplo de {0}.",
+                "errLength": "Por favor, proporciona {length} caracteres.",
+                "errColor": "Por favor, proporciona un color válido.",
+                "lblPleaseSelect": "Por favor, selecciona"
+            },
+            "fields": {
+                "file": {
+                    "errExtensions": "El archivo {file} no es válido, los tipos de archivo permitidos son: {extensions}",
+                    "errMaxSize": "El tamaño del archivo {file} ({size}) excede el tamaño máximo de carga de {minSize}",
+                    "errMinSize": "El tamaño del archivo {file} ({size}) debe ser al menos {maxSize}",
+                    "lblAddFile": "Agregar archivo"
+                },
+                "image": {
+                    "lblAddFile": "Agregar imagen"
+                },
+                "email": {
+                    "errRegex": "Por favor, proporciona una dirección de correo electrónico válida"
+                },
+                "password": {
+                    "errRegex": "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
+                    "lblConfirmPassword": "Confirmar contraseña",
+                    "lblPassword": "Contraseña",
+                    "errPasswordMatch": "Las contraseñas no coinciden"
+                }
+            }
+        }
+    },
+    "services": {}
+}

@@ -1,6 +1,6 @@
 {
     "name": "@arpadroid/i18n",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Internationalization module",
     "exports": "./dist/index.js",
     "type": "module",

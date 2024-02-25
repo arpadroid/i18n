@@ -55,8 +55,6 @@ class I18n {
         localeOptions: DEFAULT_LANGUAGE_OPTIONS,
         urlParam: 'language'
     };
-    /** @type {i18nInterface} _config - The configuration. */
-    _config = {};
 
     /** @property {string} defaultLocale - The default application locale. */
     static defaultLocale = DEFAULT_LOCALE;

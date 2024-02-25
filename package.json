@@ -3,6 +3,7 @@
     "version": "1.0.1",
     "description": "Internationalization module",
     "exports": "./dist/index.js",
+    "module": "./dist/index.js",
     "type": "module",
     "scripts": {
         "prepublish": "npm run build",

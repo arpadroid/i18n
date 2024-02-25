@@ -44,7 +44,6 @@ It should be used as a singleton.
     * [new I18n(config)](#new_I18n_new)
     * _instance_
         * [._defaultConfig](#I18n+_defaultConfig)
-        * [._config](#I18n+_config) : [<code>i18nInterface</code>](#i18nInterface)
         * [.defaultLocale](#I18n+defaultLocale)
         * [._config](#I18n+_config) : [<code>i18nInterface</code>](#i18nInterface)
         * [.setConfig(config)](#I18n+setConfig)
@@ -88,12 +87,6 @@ Set the configuration for the service.
 | --- | --- | --- |
 | _defaultConfig | [<code>i18nInterface</code>](#i18nInterface) | The default config. |
 
-<a name="I18n+_config"></a>
-
-### i18n.\_config : [<code>i18nInterface</code>](#i18nInterface)
-_config - The configuration.
-
-**Kind**: instance property of [<code>I18n</code>](#I18n)  
 <a name="I18n+defaultLocale"></a>
 
 ### i18n.defaultLocale

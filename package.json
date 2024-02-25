@@ -2,8 +2,8 @@
     "name": "@arpadroid/i18n",
     "version": "1.0.2",
     "description": "Internationalization module",
-    "exports": "./dist/index.js",
-    "module": "./dist/index.js",
+    "exports": "./dist/arpadroid-i18n.js",
+    "module": "./dist/arpadroid-i18n.js",
     "type": "module",
     "scripts": {
         "prepublish": "npm run build",

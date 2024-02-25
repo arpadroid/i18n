@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "prepublish": "npm run build",
-        "generate-docs": "jsdoc2md src/services/i18n.js > README.md",
+        "generate-docs": "jsdoc2md src/services/*.js src/components/*/*.js > README.md",
         "build": "webpack --mode production",
         "build:run": "npm run build && npm run dev",
         "dev": "webpack serve --mode development",

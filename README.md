@@ -6,6 +6,9 @@
 It is used to fetch, store and switch the language.
 It should be used as a singleton.</p>
 </dd>
+<dt><a href="#I18nText">I18nText</a></dt>
+<dd><p>Custom element for displaying internationalized text.</p>
+</dd>
 </dl>
 
 ## Functions
@@ -285,6 +288,59 @@ Adds the 'common' payload to the requested item payload.
 | payload | <code>Record.&lt;string, unknown&gt;</code> | 
 | path | <code>string</code> | 
 
+<a name="I18nText"></a>
+
+## I18nText
+Custom element for displaying internationalized text.
+
+**Kind**: global class  
+
+* [I18nText](#I18nText)
+    * _instance_
+        * [.i18n](#I18nText+i18n) : [<code>I18n</code>](#I18n)
+        * [.render()](#I18nText+render)
+        * [.getReplacements()](#I18nText+getReplacements) ⇒ <code>Array</code>
+        * [.doReplacements(text, replacements)](#I18nText+doReplacements) ⇒ <code>string</code>
+    * _static_
+        * [.observedAttributes](#I18nText.observedAttributes) ⇒ <code>Array.&lt;string&gt;</code>
+
+<a name="I18nText+i18n"></a>
+
+### i18nText.i18n : [<code>I18n</code>](#I18n)
+**Kind**: instance property of [<code>I18nText</code>](#I18nText)  
+<a name="I18nText+render"></a>
+
+### i18nText.render()
+Renders the text.
+
+**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
+<a name="I18nText+getReplacements"></a>
+
+### i18nText.getReplacements() ⇒ <code>Array</code>
+Retrieves the replacements from the 'replacements' attribute.
+
+**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
+**Returns**: <code>Array</code> - Array of replacement key-value pairs.  
+<a name="I18nText+doReplacements"></a>
+
+### i18nText.doReplacements(text, replacements) ⇒ <code>string</code>
+Replaces the placeholders in the text with the given replacements.
+
+**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
+**Returns**: <code>string</code> - The text with the replacements.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| text | <code>string</code> | The text to replace the placeholders in. |
+| replacements | <code>Array</code> | Array of replacement key-value pairs. |
+
+<a name="I18nText.observedAttributes"></a>
+
+### I18nText.observedAttributes ⇒ <code>Array.&lt;string&gt;</code>
+Defines the observed attributes for the element.
+
+**Kind**: static property of [<code>I18nText</code>](#I18nText)  
+**Returns**: <code>Array.&lt;string&gt;</code> - Array of observed attribute names.  
 <a name="signal - Emits a signal."></a>
 
 ## signal - Emits a signal.(signalName, payload)

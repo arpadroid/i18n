@@ -67,10 +67,13 @@
                     "lblAddFile": "Add File"
                 },
                 "image": {
-                    "lblAddFile": "Add Image"
+                    "lblAddFile": "Add Image",
+                    "msgFileOverwriteWarning": "The original image will be overwritten. Please save your changes to upload the new image"
                 },
                 "email": {
-                    "errRegex": "Please provide a valid email address"
+                    "errRegex": "Please provide a valid email address",
+                    "errEmailMatch": "The email addresses do not match",
+                    "lblConfirmEmail": "Confirm Email"
                 },
                 "password": {
                     "errRegex": "The password must contain at least 8 characters, one upper-case letter, one lower-case letter, and one number",

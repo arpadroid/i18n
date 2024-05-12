@@ -33,7 +33,6 @@ export let LOCALE = DEFAULT_LOCALE;
  * It should be used as a singleton.
  */
 class I18n {
-
     static _instance;
     /**
      * Returns the instance of the I18n service.
@@ -135,8 +134,15 @@ class I18n {
         return rv;
     }
 
-    static getText(path) {
-        return getPropertyValue(path, TEXT);
+    static getText(path, replacements = {}) {
+        let rv = getPropertyValue(path, TEXT);
+        if (typeof rv !== 'string') {
+            return '';
+        }
+        for (const [key, value] of Object.entries(replacements)) {
+            rv = rv.replace(`{${key}}`, value);
+        }
+        return rv;
     }
 
     /**

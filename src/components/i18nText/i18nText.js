@@ -63,5 +63,7 @@ class I18nText extends HTMLElement {
     }
 }
 
-customElements.define('i18n-text', I18nText);
+if (!customElements.get('i18n-text')) {
+    customElements.define('i18n-text', I18nText);
+}
 export default I18nText;

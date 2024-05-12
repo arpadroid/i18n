@@ -6,6 +6,7 @@
             "lblSubmit": "Submit",
             "lblEmail": "Email",
             "lblUpload": "Upload",
+            "lblUploads": "Uploads",
             "lblName": "Name",
             "lblPassword": "Password",
             "lblConfirmPassword": "Confirm Password",
@@ -30,7 +31,14 @@
         "placeholders": {},
         "tooltips": {}
     },
-    "components": {},
+    "components": {
+        "dropArea": {
+            "txtDropFiles": "Drop your files here or click to select."
+        },
+        "tagList": {
+            "txtNoTags": "No tags found."
+        }
+    },
     "contexts": {},
     "modules": {
         "user": {
@@ -39,7 +47,8 @@
         "list": {
             "txtNoResults": "No results found for {result}.",
             "txtSearchResults": "Found {resultCount} search results for {result}.",
-            "txtAllResults": "Showing {pageCount} out of {resultCount} results."
+            "txtAllResults": "Showing {pageCount} out of {resultCount} results.",
+            "txtNoItemsFound": "No items found."
         },
         "form": {
             "formComponent": {
@@ -69,13 +78,19 @@
             "fields": {
                 "file": {
                     "errExtensions": "The file {file} is invalid, allowed file types are: {extensions}",
-                    "errMaxSize": "The file size for {file} ({size}) exceeds the maximum upload size of {minSize}",
-                    "errMinSize": "The file size for {file} ({size}) needs to be at least {maxSize}",
-                    "lblAddFile": "Add File"
+                    "errMaxSize": "The file size for {file} ({size}) exceeds the maximum upload size of {maxSize}",
+                    "errMinSize": "The file size for {file} ({size}) needs to be at least {minSize}",
+                    "lblAddFile": "Add file",
+                    "lblRemoveUpload": "Remove upload",
+                    "lblUploadedFiles": "Uploaded files",
+                    "msgFileOverwriteWarning": "The original file will be overwritten if you save your changes, are you sure?",
+                    "lblRemoveFile": "Remove file"
                 },
                 "image": {
                     "lblAddFile": "Add Image",
-                    "msgFileOverwriteWarning": "The original image will be overwritten. Please save your changes to upload the new image"
+                    "lblUploadedFiles": "Uploaded images",
+                    "msgFileOverwriteWarning": "The original image will be overwritten. Please save your changes to upload the new image",
+                    "errExtensions": "The image file {file} is invalid, allowed file types are: {extensions}"
                 },
                 "email": {
                     "errRegex": "Please provide a valid email address",
@@ -86,7 +101,26 @@
                     "errRegex": "The password must contain at least 8 characters, one upper-case letter, one lower-case letter, and one number",
                     "lblConfirmPassword": "Confirm Password",
                     "lblPassword": "Password",
-                    "errPasswordMatch": "The passwords do not match"
+                    "errPasswordMatch": "The passwords do not match",
+                    "lblHidePassword": "Hide password",
+                    "lblShowPassword": "Show password"
+                },
+                "tag": {
+                    "txtNoTagsSelected": "No tags selected"
+                },
+                "date": {
+                    "errPastDisabled": "Past dates are not allowed.",
+                    "errFutureDisabled": "Future dates are not allowed.",
+                    "errMinDate": "Date must be after {date}",
+                    "errMaxDate": "Date must be before {date}",
+                    "txtShowPicker": "Show picker"
+                },
+                "number": {
+                    "errNumber": "Please provide a valid number.",
+                    "errMin": "Please provide a value greater than or equal to {min}",
+                    "errMax": "Please provide a value less than or equal to {max}",
+                    "errRange": "Please provide a value between {min} and {max}",
+                    "errStep": "Please provide a multiple of {step}"
                 }
             }
         }

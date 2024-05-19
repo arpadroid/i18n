@@ -45,7 +45,7 @@ class I18nText extends HTMLElement {
             this.getAttribute('replacements')
                 ?.split(',')
                 .map(replacement => {
-                    const [key, value] = replacement.split(':');
+                    const [key, value] = replacement.split('::');
                     return [key, value];
                 }) ?? []
         );

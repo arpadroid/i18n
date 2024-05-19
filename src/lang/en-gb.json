@@ -76,6 +76,18 @@
                 "lblPleaseSelect": "Please select"
             },
             "fields": {
+                "date": {
+                    "errPastDisabled": "Past dates are not allowed.",
+                    "errFutureDisabled": "Future dates are not allowed.",
+                    "errMinDate": "Date must be after {date}",
+                    "errMaxDate": "Date must be before {date}",
+                    "txtShowPicker": "Show picker"
+                },
+                "email": {
+                    "errRegex": "Please provide a valid email address",
+                    "errEmailMatch": "The email addresses do not match",
+                    "lblConfirmEmail": "Confirm Email"
+                },
                 "file": {
                     "errExtensions": "The file {file} is invalid, allowed file types are: {extensions}",
                     "errMaxSize": "The file size for {file} ({size}) exceeds the maximum upload size of {maxSize}",
@@ -92,10 +104,12 @@
                     "msgFileOverwriteWarning": "The original image will be overwritten. Please save your changes to upload the new image",
                     "errExtensions": "The image file {file} is invalid, allowed file types are: {extensions}"
                 },
-                "email": {
-                    "errRegex": "Please provide a valid email address",
-                    "errEmailMatch": "The email addresses do not match",
-                    "lblConfirmEmail": "Confirm Email"
+                "number": {
+                    "errNumber": "Please provide a valid number.",
+                    "errMin": "Please provide a value greater than or equal to {min}",
+                    "errMax": "Please provide a value less than or equal to {max}",
+                    "errRange": "Please provide a value between {min} and {max}",
+                    "errStep": "Please provide a multiple of {step}"
                 },
                 "password": {
                     "errRegex": "The password must contain at least 8 characters, one upper-case letter, one lower-case letter, and one number",
@@ -105,22 +119,25 @@
                     "lblHidePassword": "Hide password",
                     "lblShowPassword": "Show password"
                 },
+                "selectCombo": {
+                    "lblNoSelection": "No selection"
+                },
                 "tag": {
-                    "txtNoTagsSelected": "No tags selected"
+                    "txtNoTagsSelected": "No tags selected",
+                    "lblSearchTags": "Search tags"
                 },
-                "date": {
-                    "errPastDisabled": "Past dates are not allowed.",
-                    "errFutureDisabled": "Future dates are not allowed.",
-                    "errMinDate": "Date must be after {date}",
-                    "errMaxDate": "Date must be before {date}",
-                    "txtShowPicker": "Show picker"
+                "tel": {
+                    "errRegex": "Please provide a valid phone number"
                 },
-                "number": {
-                    "errNumber": "Please provide a valid number.",
-                    "errMin": "Please provide a value greater than or equal to {min}",
-                    "errMax": "Please provide a value less than or equal to {max}",
-                    "errRange": "Please provide a value between {min} and {max}",
-                    "errStep": "Please provide a multiple of {step}"
+                "time": {
+                    "errMin": "Please provide a time equal or after {min}",
+                    "errMax": "Please provide a time equal or before {max}"
+                },
+                "url": {
+                    "errUrl": "Please provide a valid URL."
+                },
+                "week": {
+                    "lblShowPicker": "Show week picker"
                 }
             }
         }

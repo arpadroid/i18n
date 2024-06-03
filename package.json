@@ -49,6 +49,6 @@
         "webpack-dev-server": "^5.0.2"
     },
     "dependencies": {
-        "@arpadroid/tools": "^0.0.13"
+        "@arpadroid/tools": "file:../tools"
     }
 }

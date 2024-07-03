@@ -10,7 +10,7 @@
         "build": "node ./node_modules/@arpadroid/arpadroid/scripts/build-project.mjs --project=i18n --minify",
         "prepublish": "npm run build",
         "storybook:build": "storybook build",
-        "storybook": "npm run build -- --storybook=6011",
+        "storybook": "npm run build -- --storybook=6011 --watch",
         "test": "npm run storybook:test",
         "test:storybook": "test-storybook"
     },

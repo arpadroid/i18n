@@ -57,6 +57,15 @@
                 "lblSortAsc": "Sort ascending",
                 "lblSortDesc": "Sort descending",
                 "lblNoSelection": "No preference"
+            },
+            "multiSelect": {
+                "txtNoItemsSelected": "No items selected",
+                "txtItemsSelected": "{count} items selected",
+                "txtSelections": "Selections",
+                "txtSelectAll": "Select all",
+                "txtShowSelectedOnly": "Show selected only",
+                "txtBatchOperations": "Batch operations",
+                "txtSelectAction": "Select an action"
             }
         },
         "form": {

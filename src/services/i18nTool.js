@@ -10,7 +10,7 @@ const html = String.raw;
  * @param {'text' | 'html' | 'nodes'} returnType - The type of the return value.
  * @returns {string | HTMLElement[] | HTMLElement | undefined} The parsed text or nodes.
  */
-export function parseText(text, returnType = 'text') {
+export function parseI18nText(text, returnType = 'text') {
     const nodes = [];
     const rv = text?.replace(/(?<!=")i18n{([^}]+)}/g, (match, key) => {
         const $text = I18n.getText(key) || match;
@@ -32,5 +32,34 @@ export function parseText(text, returnType = 'text') {
  * @returns {string}
  */
 export function processTemplate(template, props = {}, parseType = 'html') {
-    return parseText(_processTemplate(template, props), parseType);
+    return parseI18nText(_processTemplate(template, props), parseType);
+}
+
+/**
+ * Checks if a string is an i18n key.
+ * @param {string} string - The string to check.
+ * @returns {boolean}
+ */
+export function isI18nKey(string) {
+    return !string.includes(' ') && string.includes('.');
+}
+
+/**
+ * Renders an i18n component if a key is passed otherwise returns as is.
+ * @param {string} key - The key to render.
+ * @param {Record<string, unknown>} replacements - The replacements for the i18n text.
+ * @returns {string}
+ */
+export function renderI18n(key, replacements = {}) {
+    let replacementStr = '';
+    const parts = [];
+    for (const [key, value] of Object.entries(replacements)) {
+        parts.push(`${key}::${value}`);
+    }
+    if (parts.length) {
+        replacementStr = ` replacements="${parts.join(',')}" `;
+    }
+    return isI18nKey(key)
+        ? html`<i18n-text key="${key}" ${replacementStr}></i18n-text>`
+        : html`<i18n-text key="unknown">${key}</i18n-text>`;
 }

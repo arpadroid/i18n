@@ -156,7 +156,8 @@
                     "errUrl": "Please provide a valid URL."
                 },
                 "week": {
-                    "lblShowPicker": "Show week picker"
+                    "lblShowPicker": "Show week picker",
+                    "errWeek": "Please provide a valid week format eg: <strong>2022-W01</strong>, <strong>2022W52</strong>"
                 }
             }
         }

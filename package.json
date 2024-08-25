@@ -9,10 +9,8 @@
         "generate-docs": "jsdoc2md src/services/*.js src/components/*/*.js > README.md",
         "build": "node ./node_modules/@arpadroid/arpadroid/scripts/build-project.mjs --project=i18n --minify",
         "prepublish": "npm run build",
-        "storybook:build": "storybook build",
-        "storybook": "npm run build -- --storybook=6011 --watch",
-        "test": "npm run storybook:test",
-        "test:storybook": "test-storybook"
+        "storybook": "npm run build -- --storybook=6004 --watch",
+        "test": "node ./node_modules/@arpadroid/arpadroid/scripts/test-project.mjs --project=i18n --storybook --jest --port=6004"
     },
     "repository": {
         "type": "git",

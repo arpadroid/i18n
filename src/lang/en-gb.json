@@ -37,6 +37,12 @@
         },
         "tagList": {
             "txtNoTags": "No tags found."
+        },
+        "pager": {
+            "label": "Pagination",
+            "lblCurrentPage": "Current page",
+            "lblNextPage": "Next page",
+            "lblPrevPage": "Previous page"
         }
     },
     "contexts": {},

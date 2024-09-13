@@ -17,6 +17,8 @@ class I18nText extends HTMLElement {
         /** @type {I18n} */
         this.i18n = I18n.getInstance();
         this.i18n.listen('locale', this.render.bind(this));
+        this.replacementNodes = this.querySelectorAll('i18n-replace');
+        this.replacementNodes.forEach(node => node.remove());
     }
 
     connectedCallback() {
@@ -28,12 +30,22 @@ class I18nText extends HTMLElement {
      */
     render() {
         const key = this.getAttribute('key');
+        let content = '';
         if (key) {
             const text = I18n.getText(key);
             if (text) {
-                this.textContent = this.doReplacements(text);
+                content = this.doReplacements(text);
             }
         }
+        if (this.replacementNodes.length) {
+            const nodeReplacements = [];
+            this.replacementNodes.forEach(node => {
+                const name = node.getAttribute('name');
+                nodeReplacements.push([name, node.innerHTML]);
+            });
+            content = this.doReplacements(content, nodeReplacements);
+        }
+        this.innerHTML = content;
     }
 
     /**
@@ -49,6 +61,17 @@ class I18nText extends HTMLElement {
                     return [key, value];
                 }) ?? []
         );
+    }
+
+    getReplacementAttributes(node) {
+        const attr = {};
+        node.attributes.forEach(attribute => {
+            const exceptions = ['key', 'replacements'];
+            if (!exceptions.includes(attribute.name)) {
+                attr[attribute.name] = attribute.value;
+            }
+        });
+        return attr;
     }
 
     /**

@@ -32,8 +32,14 @@
         "tooltips": {}
     },
     "components": {
+        "image": {
+            "txtNoImage": "No image(s)",
+            "lblLoadingImage": "Loading image...",
+            "errLoad": "Error loading image.",
+            "txtUploadImage": "Upload Image"
+        },
         "dropArea": {
-            "txtDropFiles": "Drop your files here or click to select."
+            "txtDropFiles": "Upload Files"
         },
         "tagList": {
             "txtNoTags": "No tags found."

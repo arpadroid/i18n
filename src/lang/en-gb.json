@@ -63,11 +63,11 @@
             "txtNoItemsFound": "No items found.",
             "listSort": {
                 "lblSort": "Sort",
-                "lblSortBy": "Sort by:",
+                "lblSortedBy": "Sorted by:",
                 "lblAscending": "Ascending",
                 "lblDescending": "Descending",
-                "lblSortAsc": "Sort ascending",
-                "lblSortDesc": "Sort descending",
+                "lblSortAsc": "Sorted <strong>ascending</strong>",
+                "lblSortDesc": "Sorted <strong>descending</strong>",
                 "lblNoSelection": "no preference"
             },
             "multiSelect": {

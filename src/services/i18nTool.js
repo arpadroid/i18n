@@ -1,5 +1,8 @@
-import { processTemplate as _processTemplate, renderNode } from '@arpadroid/tools';
+import { renderNode, mapHTML, CustomElementTool, camelToDashed } from '@arpadroid/tools';
+import { processTemplate as _processTemplate } from '@arpadroid/tools';
 import I18n from './i18n.js';
+
+const { getProperty } = CustomElementTool;
 
 const html = String.raw;
 
@@ -51,15 +54,29 @@ export function isI18nKey(string) {
  * @returns {string}
  */
 export function renderI18n(key, replacements = {}) {
-    let replacementStr = '';
-    const parts = [];
-    for (const [key, value] of Object.entries(replacements)) {
-        parts.push(`${key}::${value}`);
-    }
-    if (parts.length) {
-        replacementStr = ` replacements="${parts.join(',')}" `;
-    }
-    return isI18nKey(key)
-        ? html`<i18n-text key="${key}" ${replacementStr}></i18n-text>`
-        : html`<i18n-text key="unknown">${key}</i18n-text>`;
+    return I18n.getText(key)
+        ? html`<i18n-text key="${key}">
+              ${mapHTML(
+                  Object.keys(replacements),
+                  key => html`<i18n-replace name="${key}">${replacements[key]}</i18n-replace>`
+              )}
+          </i18n-text>`
+        : '';
+}
+
+/**
+ * Similar to renderI18n but for i18n-text components inside custom elements that extend ArpaElement.
+ * The reason this is abstracted is to support custom built-in elements that don't extend ArpaElement.
+ * @param {HTMLElement} element - The element to render the i18n-text component for.
+ * @param {string} key - The key to render.
+ * @param {Record<string, string>} replacements - The replacements for the i18n text.
+ * @param {string} [base] - The base key to use.
+ * @returns {string} The rendered i18n text.
+ */
+export function arpaElementI18n(element, key, replacements, base = 'common') {
+    const parts = key.split('.');
+    const keyLast = parts.pop();
+    const attributeName = camelToDashed(keyLast);
+    const configValue = getProperty(element, attributeName);
+    return renderI18n(configValue ?? `${base}.${key}`, replacements);
 }

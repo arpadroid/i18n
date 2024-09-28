@@ -71,7 +71,7 @@ class I18n {
      * @param {string} signalName - The signal to listen for.
      * @param {Function} callback - The callback function.
      */
-    listen;
+    on;
 
     /**
      * Set the configuration for the service.

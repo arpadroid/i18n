@@ -16,7 +16,7 @@ class I18nText extends HTMLElement {
         super();
         /** @type {I18n} */
         this.i18n = I18n.getInstance();
-        this.i18n.listen('locale', this.render.bind(this));
+        this.i18n.on('locale', this.render.bind(this));
         this.replacementNodes = this.querySelectorAll('i18n-replace');
         this.replacementNodes.forEach(node => node.remove());
     }

@@ -78,5 +78,5 @@ export function arpaElementI18n(element, key, replacements, base = 'common') {
     const keyLast = parts.pop();
     const attributeName = camelToDashed(keyLast);
     const configValue = getProperty(element, attributeName);
-    return renderI18n(configValue ?? `${base}.${key}`, replacements);
+    return renderI18n(configValue || `${base}.${key}`, replacements);
 }

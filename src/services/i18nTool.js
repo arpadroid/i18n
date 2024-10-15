@@ -1,4 +1,4 @@
-import { renderNode, mapHTML, CustomElementTool, camelToDashed } from '@arpadroid/tools';
+import { renderNode, mapHTML, CustomElementTool, camelToDashed, attrString } from '@arpadroid/tools';
 import { processTemplate as _processTemplate } from '@arpadroid/tools';
 import I18n from './i18n.js';
 
@@ -51,11 +51,13 @@ export function isI18nKey(string) {
  * Renders an i18n component if a key is passed otherwise returns as is.
  * @param {string} key - The key to render.
  * @param {Record<string, unknown>} replacements - The replacements for the i18n text.
+ * @param {Record<string, string>} attributes - The attributes to add to the i18n component.
  * @returns {string}
  */
-export function renderI18n(key, replacements = {}) {
+export function renderI18n(key, replacements = {}, attributes = {}) {
+    const name = key.split('.').pop();
     return I18n.getText(key)
-        ? html`<i18n-text key="${key}">
+        ? html`<i18n-text key="${key}" zone="i18n-${name}" ${attrString(attributes)}>
               ${mapHTML(
                   Object.keys(replacements),
                   key => html`<i18n-replace name="${key}">${replacements[key]}</i18n-replace>`
@@ -70,13 +72,14 @@ export function renderI18n(key, replacements = {}) {
  * @param {HTMLElement} element - The element to render the i18n-text component for.
  * @param {string} key - The key to render.
  * @param {Record<string, string>} replacements - The replacements for the i18n text.
+ * @param {Record<string, string>} attributes - The attributes to add to the i18n component.
  * @param {string} [base] - The base key to use.
  * @returns {string} The rendered i18n text.
  */
-export function arpaElementI18n(element, key, replacements, base = 'common') {
+export function arpaElementI18n(element, key, replacements, attributes, base = 'common') {
     const parts = key.split('.');
     const keyLast = parts.pop();
     const attributeName = camelToDashed(keyLast);
     const configValue = getProperty(element, attributeName);
-    return renderI18n(configValue || `${base}.${key}`, replacements);
+    return configValue || renderI18n(`${base}.${key}`, replacements, attributes);
 }

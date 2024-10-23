@@ -44,6 +44,15 @@
         "tagList": {
             "txtNoTags": "No tags found."
         },
+        "confirmDialog": {
+            "lblTitle": "Confirm",
+            "lblMessage": "Are you sure you want to delete this item?",
+            "lblConfirm": "Confirm",
+            "lblCancel": "Cancel"
+        },
+        "dialog": {
+            "lblClose": "Close dialog"
+        },
         "pager": {
             "label": "Pagination",
             "lblCurrentPage": "Current page",

@@ -1,0 +1,32 @@
+{
+    "errors": {},
+    "labels": {
+        "lblSearch": "Search",
+        "lblSubmit": "Submit",
+        "lblEmail": "Email",
+        "lblUpload": "Upload",
+        "lblUploads": "Uploads",
+        "lblName": "Name",
+        "lblPassword": "Password",
+        "lblConfirmPassword": "Confirm Password",
+        "lblAddFile": "Add File",
+        "lblAddImage": "Add Image",
+        "lblAdd": "Add",
+        "lblRemove": "Remove",
+        "lblCancel": "Cancel",
+        "lblSave": "Save",
+        "lblEdit": "Edit",
+        "lblDelete": "Delete",
+        "lblClose": "Close",
+        "lblYes": "Yes",
+        "lblNo": "No",
+        "lblOk": "Ok",
+        "lblBack": "Back",
+        "lblNext": "Next",
+        "lblFinish": "Finish",
+        "lblLoading": "Loading"
+    },
+    "messages": {},
+    "placeholders": {},
+    "tooltips": {}
+}

@@ -1,8 +1,5 @@
 import { getPropertyValue, getURLParam, mergeObjects, ObserverTool } from '@arpadroid/tools';
 import { DEFAULT_LANGUAGE_OPTIONS, DEFAULT_LOCALE, LANGUAGES_PATH } from '../config/config.js';
-import DEFAULT_LANGUAGE from '../lang/en-gb.json';
-export let TEXT = DEFAULT_LANGUAGE;
-export let LOCALE = DEFAULT_LOCALE;
 
 /**
  * Locale Option interface for the language selection.
@@ -36,13 +33,15 @@ class I18n {
     static _instance;
     /**
      * Returns the instance of the I18n service.
+     * @param {i18nInterface} config
      * @returns {I18n}
      */
-    static getInstance() {
-        if (!this._instance) {
-            this._instance = new I18n();
+    static getInstance(config = {}) {
+        if (!window?.i18nInstance) {
+            window.i18nInstance = new I18n(config);
         }
-        return this._instance;
+        this._instance = window.i18nInstance;
+        return window.i18nInstance;
     }
 
     /** @property {i18nInterface} _defaultConfig - The default config. */
@@ -50,7 +49,7 @@ class I18n {
         path: LANGUAGES_PATH,
         defaultLocale: DEFAULT_LOCALE,
         locale: DEFAULT_LOCALE,
-        payload: DEFAULT_LANGUAGE,
+        payload: undefined,
         localeOptions: DEFAULT_LANGUAGE_OPTIONS,
         urlParam: 'language'
     };
@@ -77,15 +76,21 @@ class I18n {
      * Set the configuration for the service.
      * @param {i18nInterface} config
      */
-    constructor(config) {
+    constructor(config = {}) {
+        this.payload = undefined;
         I18n._instance = this;
         ObserverTool.mixin(this);
         this.setConfig(config);
+        if (!this.payload || JSON.stringify(this.payload) === '{}') {
+            this._loadDefaultPayload();
+        } else {
+            this.signal('locale', { locale: this.locale, payload: this.payload });
+        }
     }
 
     _loadDefaultPayload() {
         return this.fetchLanguage(I18n.defaultLocale).then(payload => {
-            TEXT = payload;
+            this.payload = payload;
             return Promise.resolve(payload);
         });
     }
@@ -97,10 +102,8 @@ class I18n {
     setConfig(config = {}) {
         /** @type {i18nInterface} */
         this._config = mergeObjects(this._defaultConfig, config);
-        
-        if (this._config?.locale) {
-            LOCALE = this._config.locale;
-        }
+        this.payload = this._config.payload;
+        this.locale = this._config.locale;
     }
 
     /**
@@ -134,11 +137,9 @@ class I18n {
         return rv;
     }
 
-    static getText(path, replacements = {}) {
-        let rv = getPropertyValue(path, TEXT);
-        if (typeof rv !== 'string') {
-            return '';
-        }
+    static getText(path, replacements = {}, payload = I18n.getInstance()?.payload) {
+        let rv = getPropertyValue(path, payload);
+        if (typeof rv !== 'string') return '';
         for (const [key, value] of Object.entries(replacements)) {
             rv = rv.replace(`{${key}}`, value);
         }
@@ -151,7 +152,7 @@ class I18n {
      * @param {Record<string, unknown>} payload
      * @returns {Record<string, unknown>}
      */
-    static getPayload(path, payload = TEXT) {
+    static getPayload(path, payload = I18n.getInstance()?.payload) {
         if (!path) {
             return payload;
         }
@@ -165,11 +166,13 @@ class I18n {
      * @returns {Record<string, unknown>}
      */
     static getDefaultPayload(path, payload) {
-        const defaultPayload = getPropertyValue(path, DEFAULT_LANGUAGE, {});
+        const instance = I18n.getInstance();
+        const defaultLanguage = instance._config?.payload;
+        const defaultPayload = getPropertyValue(path, defaultLanguage, {});
         if (JSON.stringify(payload) === '{}') {
             payload = { ...defaultPayload };
         }
-        if (LOCALE !== I18n.defaultLocale) {
+        if (instance.locale !== I18n.defaultLocale) {
             payload = { ...defaultPayload, ...payload };
         }
         return payload;
@@ -189,7 +192,7 @@ class I18n {
      * @returns {string}
      */
     getLocale() {
-        const locale = this.getURLocale() ?? this.getStoredLocale() ?? LOCALE ?? I18n.defaultLocale;
+        const locale = this.getURLocale() ?? this.getStoredLocale() ?? this.locale ?? I18n.defaultLocale;
         return this.preprocessLocale(locale);
     }
 
@@ -208,9 +211,7 @@ class I18n {
      */
     preprocessLocale(locale) {
         const lang = locale.toLowerCase();
-        if (lang === 'en-au') {
-            return 'en-gb';
-        }
+        if (lang === 'en-au') return 'en-gb';
         return lang;
     }
 
@@ -219,21 +220,18 @@ class I18n {
      * @param {string} locale
      * @returns {Promise<Response>}
      */
-    setLocale(locale) {
-        return new Promise(resolve => {
-            if (this.preprocessLocale(locale)) {
-                this.fetchLanguage(locale).then(resolve);
-            } else {
-                this.setDefaultLocale();
-                resolve(DEFAULT_LANGUAGE);
-            }
-        });
+    async setLocale(locale) {
+        if (this.preprocessLocale(locale)) {
+            return await this.fetchLanguage(locale);
+        }
+        this.setDefaultLocale();
+        return this._config.payload;
     }
 
     /**
      * Fetches the language payload from the server.
      * @param {string} locale
-     * @returns {Promise<Response>}
+     * @returns {Promise<Response> | undefined}
      */
     fetchLanguage(locale) {
         const url = this._config.path + `/${locale}.json`;
@@ -245,7 +243,7 @@ class I18n {
             })
             .catch(() => {
                 this.setDefaultLocale();
-                return Promise.resolve(DEFAULT_LANGUAGE);
+                return Promise.resolve(this._config.payload);
             });
     }
 
@@ -255,10 +253,10 @@ class I18n {
      * @param {Record<string, any>} payload
      */
     handleFetchPayload(locale, payload) {
-        LOCALE = locale;
-        TEXT = payload;
-        this.storeLocale(LOCALE);
-        this.signal('locale', { locale: LOCALE, payload: TEXT });
+        this.locale = locale;
+        this.payload = payload;
+        this.storeLocale(this.locale);
+        this.signal('locale', { locale: this.locale, payload: this.payload });
     }
 
     /**
@@ -271,18 +269,19 @@ class I18n {
             return Promise.reject(`locale not supported: ${locale}`);
         }
         return this.setLocale(locale).then(locale => {
-            this.setUserLocale(locale);
+            // this.setUserLocale(locale);
             return Promise.resolve(locale);
         });
     }
 
     /**
      * Sets the locale to the defaultLocale.
+     * @param {Record<string, unknown>} defaultPayload
      */
-    setDefaultLocale() {
-        TEXT = DEFAULT_LANGUAGE;
-        LOCALE = I18n.defaultLocale;
-        this.signal('locale', { locale: LOCALE, payload: TEXT });
+    setDefaultLocale(defaultPayload = this._config.payload) {
+        this.payload = defaultPayload;
+        this.locale = I18n.defaultLocale;
+        this.signal('locale', { locale: this.locale, payload: this.payload });
     }
 
     /**

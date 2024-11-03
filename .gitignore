@@ -3,3 +3,5 @@ node_modules/
 dist/
 junit.xml
 storybook-static/
+src/i18n/
+/test/temp/

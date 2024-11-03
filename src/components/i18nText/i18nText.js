@@ -4,24 +4,21 @@ import I18n from '../../services/i18n.js';
  * Custom element for displaying internationalized text.
  */
 class I18nText extends HTMLElement {
-    /**
-     * Defines the observed attributes for the element.
-     * @returns {string[]} Array of observed attribute names.
-     */
-    static get observedAttributes() {
-        return ['key', 'replacements'];
-    }
-
     constructor() {
         super();
         /** @type {I18n} */
         this.i18n = I18n.getInstance();
-        this.i18n.on('locale', this.render.bind(this));
+        this.update = this.update.bind(this);
+        this.i18n.on('locale', this.update);
         this.replacementNodes = this.querySelectorAll('i18n-replace');
         this.replacementNodes.forEach(node => node.remove());
     }
 
     connectedCallback() {
+        this.render();
+    }
+
+    update() {
         this.render();
     }
 

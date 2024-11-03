@@ -1,7 +1,7 @@
 export const DEFAULT_LANGUAGE_OPTIONS = [
     {
         label: 'English',
-        value: 'en-gb'
+        value: 'en'
     },
     {
         label: 'Spanish',
@@ -9,6 +9,6 @@ export const DEFAULT_LANGUAGE_OPTIONS = [
     }
 ];
 
-export const DEFAULT_LOCALE = 'en-gb';
+export const DEFAULT_LOCALE = 'en';
 
-export const LANGUAGES_PATH = 'lang/';
+export const LANGUAGES_PATH = 'i18n/';

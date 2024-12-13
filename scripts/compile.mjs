@@ -74,7 +74,6 @@ export async function addCommonFiles(store) {
     const files = await glob.sync(`${cwd}/node_modules/@arpadroid/i18n/src/lang/common.*.json`);
     files.forEach(file => {
         const language = path.basename(file).split('.')[1];
-        console.log('language', language);
         store.push({
             file,
             namespace: 'common',

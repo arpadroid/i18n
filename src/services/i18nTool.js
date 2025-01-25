@@ -14,6 +14,7 @@ const html = String.raw;
  * @returns {string | HTMLElement[] | HTMLElement | undefined} The parsed text or nodes.
  */
 export function parseI18nText(text, returnType = 'text') {
+    /** @type {HTMLElement[]} */
     const nodes = [];
     const rv = text?.replace(/(?<!=")i18n{([^}]+)}/g, (match, key) => {
         const $text = I18n.getText(key) || match;
@@ -30,9 +31,9 @@ export function parseI18nText(text, returnType = 'text') {
 /**
  * Processes a template.
  * @param {string} template - The template to process.
- * @param {Record<string, unknown>} props - The properties to replace.
+ * @param {Record<string, any>} props - The properties to replace.
  * @param {'text' | 'html'} parseType - The type of the return value for the parsing function.
- * @returns {string}
+ * @returns {string | HTMLElement | HTMLElement[] | undefined}
  */
 export function processTemplate(template, props = {}, parseType = 'html') {
     return parseI18nText(_processTemplate(template, props), parseType);
@@ -60,6 +61,7 @@ export function renderI18n(key, replacements = {}, attributes = {}) {
         ? html`<i18n-text key="${key}" zone="i18n-${name}" ${attrString(attributes)}>
               ${mapHTML(
                   Object.keys(replacements),
+                  // @ts-ignore
                   key => html`<i18n-replace name="${key}">${replacements[key]}</i18n-replace>`
               )}
           </i18n-text>`

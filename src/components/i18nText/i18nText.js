@@ -9,6 +9,7 @@ class I18nText extends HTMLElement {
         /** @type {I18n} */
         this.i18n = I18n.getInstance();
         this.update = this.update.bind(this);
+        // @ts-ignore
         this.i18n.on('locale', this.update);
         this.replacementNodes = this.querySelectorAll('i18n-replace');
         this.replacementNodes.forEach(node => node.remove());
@@ -35,6 +36,7 @@ class I18nText extends HTMLElement {
             }
         }
         if (this.replacementNodes.length) {
+            /** @type {string[][]} */
             const nodeReplacements = [];
             this.replacementNodes.forEach(node => {
                 const name = node.getAttribute('name');
@@ -47,7 +49,7 @@ class I18nText extends HTMLElement {
 
     /**
      * Retrieves the replacements from the 'replacements' attribute.
-     * @returns {Array} Array of replacement key-value pairs.
+     * @returns {string[][]} Array of replacement key-value pairs.
      */
     getReplacements() {
         return (
@@ -60,6 +62,13 @@ class I18nText extends HTMLElement {
         );
     }
 
+    /**
+     * Returns the replacements defined as attributes in the given node.
+     * @param {Element} node - The node to get the replacements from.
+     * @returns {Record<string, string>}
+     */
+    getReplacementAttributes(node) {
+        /** @type {Record<string, string>} */
     getReplacementAttributes(node) {
         const attr = {};
         node.attributes.forEach(attribute => {
@@ -74,7 +83,7 @@ class I18nText extends HTMLElement {
     /**
      * Replaces the placeholders in the text with the given replacements.
      * @param {string} text - The text to replace the placeholders in.
-     * @param {Array} replacements - Array of replacement key-value pairs.
+     * @param {string[][]} replacements - Array of replacement key-value pairs.
      * @returns {string} The text with the replacements.
      */
     doReplacements(text, replacements = this.getReplacements()) {

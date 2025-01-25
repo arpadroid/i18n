@@ -2,9 +2,11 @@ import DEFAULT_LANGUAGE from '../../../test/temp/en.json';
 import { attrString } from '@arpadroid/tools';
 import { waitFor, expect, within } from '@storybook/test';
 import I18n from '../../services/i18n';
+
 const i18n = I18n.getInstance({
     payload: DEFAULT_LANGUAGE
 });
+
 const html = String.raw;
 const I18nTextStory = {
     title: 'Components/i18nText',

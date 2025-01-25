@@ -1,0 +1,5 @@
+{
+    "extends": "./node_modules/@arpadroid/arpadroid/tsconfig.json",
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.stories.js", "**/*.test.js", "./dist/@types"]
+}

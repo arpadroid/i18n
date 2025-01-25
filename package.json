@@ -4,6 +4,7 @@
     "description": "Internationalization module",
     "exports": "./dist/arpadroid-i18n.js",
     "module": "./dist/arpadroid-i18n.js",
+    "types": "./dist/@types/types.compiled.d.ts",
     "type": "module",
     "scripts": {
         "generate-docs": "jsdoc2md src/services/*.js src/components/*/*.js > README.md",

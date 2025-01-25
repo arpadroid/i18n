@@ -7,7 +7,7 @@
  */
 
 // @ts-ignore
-import { getPropertyValue, getURLParam, mergeObjects, ObserverTool } from '@arpadroid/tools';
+import { getPropertyValue, getURLParam, mergeObjects, observerMixin, dummySignal } from '@arpadroid/tools';
 import { DEFAULT_LANGUAGE_OPTIONS, DEFAULT_LOCALE, LANGUAGES_PATH } from '../config/config.js';
 
 /**
@@ -53,25 +53,14 @@ class I18n {
     constructor(config = {}) {
         this.payload = undefined;
         I18n._instance = this;
-        ObserverTool.mixin(this);
+        this.signal = dummySignal;
+        observerMixin(this);
         this.setConfig(config);
         if (!this.payload || JSON.stringify(this.payload) === '{}') {
             this._loadDefaultPayload();
         } else {
             this.signal('locale', { locale: this.locale, payload: this.payload });
         }
-    }
-
-    /**
-     * Sends a signal to the observer.
-     * @param {string} signalName
-     * @param {unknown} payload
-     * @returns {void}
-     */
-    signal(signalName, payload) {
-        const text =
-            'This method should be overridden by the ObserverTool.mixin method, if not, there is a problem.';
-        console.error(text, { signalName, payload });
     }
 
     _loadDefaultPayload() {

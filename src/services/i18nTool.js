@@ -1,8 +1,6 @@
-import { renderNode, mapHTML, CustomElementTool, camelToDashed, attrString } from '@arpadroid/tools';
-import { processTemplate as _processTemplate } from '@arpadroid/tools';
+import { renderNode, mapHTML, camelToDashed, attrString } from '@arpadroid/tools';
+import { processTemplate as _processTemplate, getProperty } from '@arpadroid/tools';
 import I18n from './i18n.js';
-
-const { getProperty } = CustomElementTool;
 
 const html = String.raw;
 

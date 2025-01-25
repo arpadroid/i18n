@@ -5,7 +5,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 
 import path from 'path';
-import { mergeObjects, sortKeys } from '@arpadroid/tools/src/objectTool.js';
+import { mergeObjects, sortKeys } from '@arpadroid/tools/src/objectTool/objectTool.js';
 
 const { glob } = await import('glob');
 const cwd = process.cwd();

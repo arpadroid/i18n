@@ -31,7 +31,7 @@ class I18nText extends HTMLElement {
         let content = '';
         if (key) {
             const text = I18n.getText(key);
-            if (text) {
+            if (typeof text === 'string' && text.length) {
                 content = this.doReplacements(text);
             }
         }
@@ -40,7 +40,7 @@ class I18nText extends HTMLElement {
             const nodeReplacements = [];
             this.replacementNodes.forEach(node => {
                 const name = node.getAttribute('name');
-                nodeReplacements.push([name, node.innerHTML]);
+                nodeReplacements.push([name || '', node.innerHTML]);
             });
             content = this.doReplacements(content, nodeReplacements);
         }
@@ -69,9 +69,9 @@ class I18nText extends HTMLElement {
      */
     getReplacementAttributes(node) {
         /** @type {Record<string, string>} */
-    getReplacementAttributes(node) {
         const attr = {};
-        node.attributes.forEach(attribute => {
+        const attributes = Array.from(node.attributes);
+        attributes.forEach(attribute => {
             const exceptions = ['key', 'replacements'];
             if (!exceptions.includes(attribute.name)) {
                 attr[attribute.name] = attribute.value;

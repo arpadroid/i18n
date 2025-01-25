@@ -20,7 +20,8 @@ export function parseI18nText(text, returnType = 'text') {
         const $text = I18n.getText(key) || match;
         const $html = html`<i18n-text key="${key}"></i18n-text>`;
         if (returnType === 'nodes') {
-            nodes.push(renderNode($html));
+            const node = renderNode($html);
+            node instanceof HTMLElement && nodes.push(node);
             return '';
         }
         return returnType === 'html' ? $html : $text;
@@ -81,7 +82,7 @@ export function renderI18n(key, replacements = {}, attributes = {}) {
 export function arpaElementI18n(element, key, replacements, attributes, base = 'common') {
     const parts = key.split('.');
     const keyLast = parts.pop();
-    const attributeName = camelToDashed(keyLast);
+    const attributeName = camelToDashed(keyLast || '');
     const configValue = getProperty(element, attributeName);
-    return configValue || renderI18n(`${base}.${key}`, replacements, attributes);
+    return configValue?.toString() || renderI18n(`${base}.${key}`, replacements, attributes);
 }

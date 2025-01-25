@@ -5,3 +5,4 @@ junit.xml
 storybook-static/
 src/i18n/
 /test/temp/
+.tsbuildinfo

@@ -130,38 +130,42 @@ class I18n {
         return rv;
     }
 
-    static getText(path, replacements = {}, payload = I18n.getInstance()?.payload) {
-        let rv = getPropertyValue(path, payload);
+    /**
+     * Gets the text from the current language payload given a path.
+     * @param {string} path
+     * @param {Record<string, string>} replacements
+     * @param {LanguagePayloadType} payload
+     * @returns {string}
+     */
+    static getText(path, replacements = {}, payload = I18n.getInstance()?.payload || {}) {
+        let rv = getPropertyValue(path, payload, undefined) || '';
         if (typeof rv !== 'string') return '';
         for (const [key, value] of Object.entries(replacements)) {
-            rv = rv.replace(`{${key}}`, value);
+            rv = rv.toString().replace(`{${key}}`, value);
         }
-        return rv;
+        return rv.toString() || '';
     }
 
     /**
      * Gets the locale payload given a path.
      * @param {string} path
-     * @param {Record<string, unknown>} payload
-     * @returns {Record<string, unknown>}
+     * @param {LanguagePayloadType} payload
+     * @returns {LanguagePayloadType | unknown}
      */
-    static getPayload(path, payload = I18n.getInstance()?.payload) {
-        if (!path) {
-            return payload;
-        }
-        return getPropertyValue(path, payload, {});
+    static getPayload(path, payload = I18n.getInstance()?.payload || {}) {
+        return (!path && payload) || getPropertyValue(path, payload, {});
     }
 
     /**
      * The default locale payload.
      * @param {string} path
-     * @param {Record<string, unknown>} payload
-     * @returns {Record<string, unknown>}
+     * @param {LanguagePayloadType} payload
+     * @returns {LanguagePayloadType}
      */
     static getDefaultPayload(path, payload) {
         const instance = I18n.getInstance();
-        const defaultLanguage = instance._config?.payload;
-        const defaultPayload = getPropertyValue(path, defaultLanguage, {});
+        const defaultLanguage = instance._config?.payload || {};
+        const defaultPayload = getPropertyValue(path, defaultLanguage, {}) || {};
         if (JSON.stringify(payload) === '{}') {
             payload = { ...defaultPayload };
         }
@@ -191,10 +195,10 @@ class I18n {
 
     /**
      * Returns the locale value in the URL query string.
-     * @returns {string}
+     * @returns {string | undefined}
      */
     getURLocale() {
-        return getURLParam(this._config?.urlParam);
+        return getURLParam(this._config?.urlParam || '');
     }
 
     /**
@@ -254,24 +258,21 @@ class I18n {
 
     /**
      * User action for changing locale.
-     * @param {*} locale
-     * @returns {Promise<Response>}
+     * @param {string} locale
+     * @returns {Promise<unknown>}
      */
     changeLocale(locale) {
         if (!this.supportsLocale(locale)) {
             return Promise.reject(`locale not supported: ${locale}`);
         }
-        return this.setLocale(locale).then(locale => {
-            // this.setUserLocale(locale);
-            return Promise.resolve(locale);
-        });
+        return this.setLocale(locale).then(Promise.resolve);
     }
 
     /**
      * Sets the locale to the defaultLocale.
      * @param {LanguagePayloadType | undefined} defaultPayload
      */
-    setDefaultLocale(defaultPayload = this._config.payload) {
+    setDefaultLocale(defaultPayload = this._config?.payload) {
         this.payload = defaultPayload;
         this.locale = I18n.defaultLocale;
         this.signal('locale', { locale: this.locale, payload: this.payload });

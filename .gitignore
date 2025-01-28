@@ -6,4 +6,5 @@ storybook-static/
 src/i18n/
 /test/temp/
 .tsbuildinfo
+tsconfig.tsbuildinfo
 .types/

@@ -70,7 +70,7 @@ export function renderI18n(key, replacements = {}, attributes = {}) {
 /**
  * Similar to renderI18n but for i18n-text components inside custom elements that extend ArpaElement.
  * The reason this is abstracted is to support custom built-in elements that don't extend ArpaElement.
- * @param {HTMLElement} element - The element to render the i18n-text component for.
+ * @param {import('@arpadroid/tools').ElementType} element - The element to render the i18n-text component for.
  * @param {string} key - The key to render.
  * @param {Record<string, string>} replacements - The replacements for the i18n text.
  * @param {Record<string, string>} attributes - The attributes to add to the i18n component.

@@ -1,3 +1,5 @@
-const config = {};
+const config = {
+    buildTypes: true
+};
 
 export default config;

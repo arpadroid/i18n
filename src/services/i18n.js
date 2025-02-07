@@ -6,8 +6,8 @@
  * @typedef {import('@arpadroid/tools').ObserverType} ObserverType
  */
 
-// @ts-ignore
-import { getPropertyValue, getURLParam, mergeObjects, observerMixin, dummySignal } from '@arpadroid/tools';
+import { getPropertyValue, getURLParam, mergeObjects, observerMixin } from '@arpadroid/tools';
+import { dummySignal, dummyListener } from '@arpadroid/tools';
 import { DEFAULT_LANGUAGE_OPTIONS, DEFAULT_LOCALE, LANGUAGES_PATH } from '../config/config.js';
 
 /**
@@ -54,6 +54,7 @@ class I18n {
         this.payload = undefined;
         I18n._instance = this;
         this.signal = dummySignal;
+        this.on = dummyListener;
         observerMixin(this);
         this.setConfig(config);
         if (!this.payload || JSON.stringify(this.payload) === '{}') {

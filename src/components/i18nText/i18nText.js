@@ -1,3 +1,4 @@
+import { defineCustomElement } from '@arpadroid/tools';
 import I18n from '../../services/i18n.js';
 
 /**
@@ -91,7 +92,6 @@ class I18nText extends HTMLElement {
     }
 }
 
-if (!customElements.get('i18n-text')) {
-    customElements.define('i18n-text', I18nText);
-}
+defineCustomElement('i18n-text', I18nText);
+
 export default I18nText;

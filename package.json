@@ -7,10 +7,10 @@
     "type": "module",
     "scripts": {
         "generate-docs": "jsdoc2md src/services/*.js src/components/*/*.js > README.md",
-        "build": "node ./node_modules/@arpadroid/arpadroid/scripts/build-project.mjs --project=i18n --minify",
+        "build": "node ./node_modules/@arpadroid/module/scripts/build-project.mjs --project=i18n --minify",
         "prepublish": "npm run build",
         "storybook": "npm run build -- --storybook=6004 --watch",
-        "test": "node ./node_modules/@arpadroid/arpadroid/scripts/test-project.mjs --project=i18n --storybook --jest --port=6004"
+        "test": "node ./node_modules/@arpadroid/module/scripts/test-project.mjs --project=i18n --storybook --jest --port=6004"
     },
     "repository": {
         "type": "git",
@@ -29,7 +29,7 @@
     },
     "homepage": "https://github.com/arpadroid/i18n#readme",
     "devDependencies": {
-        "@arpadroid/arpadroid": "file:../arpadroid",
+        "@arpadroid/module": "file:../module",
         "@babel/core": "^7.23.9",
         "@babel/plugin-syntax-import-assertions": "^7.23.3",
         "@babel/preset-env": "^7.23.9",

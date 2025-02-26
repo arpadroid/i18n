@@ -1,5 +1,3 @@
-import { ObserverType } from '@arpadroid/tools';
-
 export type LanguagePayloadType = Record<string, unknown> & {
     common?: Record<string, unknown>;
 };
@@ -23,4 +21,5 @@ export type I18nConfigType = {
     path?: string;
     localeOptions?: LocaleOptionType[];
     urlParam?: string;
+    context?: Record<string, unknown>;
 };

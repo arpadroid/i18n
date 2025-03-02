@@ -9,7 +9,7 @@ const i18n = I18n.getInstance({
 
 const html = String.raw;
 const I18nTextStory = {
-    title: 'Components/i18nText',
+    title: 'i18n/i18nText',
     tags: [],
     args: {
         key: 'i18n.testComponent.title'

@@ -29,7 +29,6 @@
     },
     "homepage": "https://github.com/arpadroid/i18n#readme",
     "devDependencies": {
-        "@arpadroid/module": "file:../module",
         "@babel/core": "^7.23.9",
         "@babel/plugin-syntax-import-assertions": "^7.23.3",
         "@babel/preset-env": "^7.23.9",
@@ -45,6 +44,7 @@
         "yargs": "^17.7.2"
     },
     "peerDependencies": {
+        "@arpadroid/module": "file:../module",
         "@arpadroid/tools": "file:../tools"
     }
 }

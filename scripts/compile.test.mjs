@@ -8,21 +8,22 @@ const cwd = process.cwd();
 
 describe('Compiles the i18n files', () => {
     it('Calls compileI18nFiles and verifies new language files are created.', async () => {
+        const componentPath = `${cwd}/src/components/testComponent`;
         const files = [
             {
-                file: `${cwd}/test/i18n/testComponent.i18n.en.json`,
+                file: `${componentPath}/testComponent.i18n.en.json`,
                 namespace: 'i18n'
             },
             {
-                file: `${cwd}/test/i18n/testComponent.i18n.es.json`,
+                file: `${componentPath}/testComponent.i18n.es.json`,
                 namespace: 'i18n'
             },
             {
-                file: `${cwd}/test/i18n/testComponent2.i18n.en.json`,
+                file: `${componentPath}/testComponent2.i18n.en.json`,
                 namespace: 'i18n'
             },
             {
-                file: `${cwd}/test/i18n/testComponent2.i18n.es.json`,
+                file: `${componentPath}/testComponent2.i18n.es.json`,
                 namespace: 'i18n'
             }
         ];

@@ -5,6 +5,9 @@
     "compilerOptions": {
         // "tsBuildInfoFile": "./.tsbuildinfo",
         "rootDir": "./src",
-        "outDir": "./.tmp/.types"
+        "outDir": "./.tmp/.types",
+        "paths": {
+            "rollup-plugin-copy": ["./node_modules/@arpadroid/module/node_modules/rollup-plugin-copy"]
+        }
     }
 }

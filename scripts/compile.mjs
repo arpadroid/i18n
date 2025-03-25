@@ -88,7 +88,7 @@ export async function addCommonFiles(store) {
  * @param {string[]} deps
  * @returns {Promise<void>}
  */
-export async function compileI18n(project, deps = project.getArpadroidDependencies()) {
+export async function compileI18n(project, deps = project.getDependencies()) {
     if (!deps.includes('i18n')) return;
     const files = [];
     await addCommonFiles(files);

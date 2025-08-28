@@ -1,5 +1,4 @@
 import { renderNode, mapHTML, camelToDashed, attrString } from '@arpadroid/tools';
-import { processTemplate as _processTemplate, getProperty } from '@arpadroid/tools';
 import I18n from './i18n.js';
 
 const html = String.raw;
@@ -28,17 +27,6 @@ export function parseI18nText(text, returnType = 'text') {
 }
 
 /**
- * Processes a template.
- * @param {string} template - The template to process.
- * @param {Record<string, any>} props - The properties to replace.
- * @param {'text' | 'html'} parseType - The type of the return value for the parsing function.
- * @returns {string | HTMLElement | HTMLElement[] | undefined}
- */
-export function processTemplate(template, props = {}, parseType = 'html') {
-    return parseI18nText(_processTemplate(template, props), parseType);
-}
-
-/**
  * Checks if a string is an i18n key.
  * @param {string} string - The string to check.
  * @returns {boolean}
@@ -60,7 +48,7 @@ export function renderI18n(key, replacements = {}, attributes = {}) {
         ? html`<i18n-text key="${key}" zone="i18n-${name}" ${attrString(attributes)}>
               ${mapHTML(
                   Object.keys(replacements),
-                  (/** @type {string} */ key) =>
+                  (/** @type {string} */  key) => // @ts-ignore
                       html`<i18n-replace name="${key}">${replacements[key]}</i18n-replace>`
               )}
           </i18n-text>`
@@ -81,6 +69,6 @@ export function arpaElementI18n(element, key, replacements = {}, attributes = {}
     const parts = key.split('.');
     const keyLast = parts.pop();
     const attributeName = camelToDashed(keyLast || '');
-    const configValue = getProperty(element, attributeName);
+    const configValue = element?.getAttribute(attributeName) || element?._config?.[attributeName];
     return configValue?.toString() || renderI18n(`${base}.${key}`, replacements, attributes);
 }

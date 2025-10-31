@@ -1,391 +1,374 @@
-## Classes
-
-<dl>
-<dt><a href="#I18n">I18n</a></dt>
-<dd><p>The I18n service class is responsible for managing the application locale.
-It is used to fetch, store and switch the language.
-It should be used as a singleton.</p>
-</dd>
-<dt><a href="#I18nText">I18nText</a></dt>
-<dd><p>Custom element for displaying internationalized text.</p>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#signal - Emits a signal.">signal - Emits a signal.(signalName, payload)</a></dt>
-<dd></dd>
-<dt><a href="#listen - Listens for a signal.">listen - Listens for a signal.(signalName, callback)</a></dt>
-<dd></dd>
-</dl>
-
-## Typedefs
-
-<dl>
-<dt><a href="#LocaleOptionInterface">LocaleOptionInterface</a> : <code>object</code></dt>
-<dd><p>Locale Option interface for the language selection.</p>
-</dd>
-<dt><a href="#i18nInterface">i18nInterface</a> : <code>object</code></dt>
-<dd><p>The I18n instance configuration.</p>
-</dd>
-</dl>
-
-<a name="I18n"></a>
-
-## I18n
-The I18n service class is responsible for managing the application locale.
-It is used to fetch, store and switch the language.
-It should be used as a singleton.
-
-**Kind**: global class  
-
-* [I18n](#I18n)
-    * [new I18n(config)](#new_I18n_new)
-    * _instance_
-        * [._defaultConfig](#I18n+_defaultConfig)
-        * [.defaultLocale](#I18n+defaultLocale)
-        * [._config](#I18n+_config) : [<code>i18nInterface</code>](#i18nInterface)
-        * [.setConfig(config)](#I18n+setConfig)
-        * [.initialize()](#I18n+initialize) ⇒ <code>Promise.&lt;unknown&gt;</code>
-        * [.getLocaleOptions()](#I18n+getLocaleOptions) ⇒ <code>Record.&lt;string, LocaleOptionInterface&gt;</code>
-        * [.getLocale()](#I18n+getLocale) ⇒ <code>string</code>
-        * [.getURLocale()](#I18n+getURLocale) ⇒ <code>string</code>
-        * [.preprocessLocale(locale)](#I18n+preprocessLocale) ⇒ <code>string</code>
-        * [.setLocale(locale)](#I18n+setLocale) ⇒ <code>Promise.&lt;Response&gt;</code>
-        * [.fetchLanguage(locale)](#I18n+fetchLanguage) ⇒ <code>Promise.&lt;Response&gt;</code>
-        * [.handleFetchPayload(locale, payload)](#I18n+handleFetchPayload)
-        * [.changeLocale(locale)](#I18n+changeLocale) ⇒ <code>Promise.&lt;Response&gt;</code>
-        * [.setDefaultLocale()](#I18n+setDefaultLocale)
-        * [.storeLocale(locale)](#I18n+storeLocale)
-        * [.getStoredLocale()](#I18n+getStoredLocale) ⇒ <code>string</code>
-        * [.supportsLocale(locale, options)](#I18n+supportsLocale) ⇒ <code>boolean</code>
-    * _static_
-        * [.getInstance()](#I18n.getInstance) ⇒ [<code>I18n</code>](#I18n)
-        * [.get(path, includeCommon)](#I18n.get) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-        * [.getPayload(path, payload)](#I18n.getPayload) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-        * [.getDefaultPayload(path, payload)](#I18n.getDefaultPayload) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-        * [.addCommonPayload(payload, path)](#I18n.addCommonPayload)
+# @arpadroid/i18n
 
-<a name="new_I18n_new"></a>
+A comprehensive internationalization (i18n) library for JavaScript applications, providing dynamic language switching, text replacement, and custom web components for seamless multilingual user experiences.
 
-### new I18n(config)
-Set the configuration for the service.
+[![npm version](https://badge.fury.io/js/@arpadroid%2Fi18n.svg)](https://www.npmjs.com/package/@arpadroid/i18n)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Features
 
-| Param | Type |
-| --- | --- |
-| config | [<code>i18nInterface</code>](#i18nInterface) | 
+🌍 **Dynamic Language Switching** - Runtime locale changes with automatic content updates  
+📦 **Singleton Service** - Centralized i18n management with observer pattern  
+🔄 **Text Replacement** - Template-based string interpolation with placeholder support  
+🎯 **Custom Web Components** - Drop-in `<i18n-text>` elements for declarative internationalization  
+💾 **Persistent Storage** - Automatic locale persistence in localStorage  
+🌐 **URL Integration** - Language selection via URL parameters  
+⚡ **Lazy Loading** - On-demand language file fetching  
+🛠️ **TypeScript Support** - Full type definitions included
 
-<a name="I18n+_defaultConfig"></a>
+## Installation
 
-### i18n.\_defaultConfig
-**Kind**: instance property of [<code>I18n</code>](#I18n)  
-**Properties**
+```bash
+npm install @arpadroid/i18n
+```
 
-| Name | Type | Description |
-| --- | --- | --- |
-| _defaultConfig | [<code>i18nInterface</code>](#i18nInterface) | The default config. |
+## Quick Start
 
-<a name="I18n+defaultLocale"></a>
+```javascript
+import { I18n, I18nText } from '@arpadroid/i18n';
 
-### i18n.defaultLocale
-**Kind**: instance property of [<code>I18n</code>](#I18n)  
-**Properties**
+// Initialize the i18n service
+const i18n = I18n.getInstance({
+    defaultLocale: 'en',
+    path: '/locales',
+    localeOptions: [
+        { label: 'English', value: 'en' },
+        { label: 'Español', value: 'es' },
+        { label: 'Français', value: 'fr' }
+    ]
+});
 
-| Name | Type | Description |
-| --- | --- | --- |
-| defaultLocale | <code>string</code> | The default application locale. |
+// Change language
+await i18n.changeLocale('es');
 
-<a name="I18n+_config"></a>
+// Get translated text
+const welcomeText = I18n.getText('welcome.message');
+```
 
-### i18n.\_config : [<code>i18nInterface</code>](#i18nInterface)
-**Kind**: instance property of [<code>I18n</code>](#I18n)  
-<a name="I18n+setConfig"></a>
+### HTML Usage
 
-### i18n.setConfig(config)
-Set the configuration for the service.
+```html
+<!-- Basic internationalized text -->
+<i18n-text key="navigation.home"></i18n-text>
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+<!-- With variable replacement -->
+<i18n-text key="welcome.greeting" replacements="name::John,time::morning"></i18n-text>
 
-| Param | Type |
-| --- | --- |
-| config | [<code>i18nInterface</code>](#i18nInterface) | 
+<!-- With nested replacement content -->
+<i18n-text key="profile.status">
+    <i18n-replace name="username">JohnDoe</i18n-replace>
+    <i18n-replace name="count">42</i18n-replace>
+</i18n-text>
+```
 
-<a name="I18n+initialize"></a>
+## API Reference
 
-### i18n.initialize() ⇒ <code>Promise.&lt;unknown&gt;</code>
-Initializes the service.
+### I18n Service
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+getLocaleOptions"></a>
+The core internationalization service implementing the singleton pattern.
 
-### i18n.getLocaleOptions() ⇒ <code>Record.&lt;string, LocaleOptionInterface&gt;</code>
-Returns the locale options.
+#### Static Methods
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+getLocale"></a>
+##### `I18n.getInstance(config)`
+Returns the singleton instance of the I18n service.
 
-### i18n.getLocale() ⇒ <code>string</code>
-Returns the locale String.
+```javascript
+const i18n = I18n.getInstance({
+    defaultLocale: 'en',
+    path: '/i18n',
+    localeOptions: [
+        { label: 'English', value: 'en' },
+        { label: 'Spanish', value: 'es' }
+    ]
+});
+```
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+getURLocale"></a>
+##### `I18n.getText(path, replacements, payload)`
+Retrieves translated text with optional variable replacement.
 
-### i18n.getURLocale() ⇒ <code>string</code>
-Returns the locale value in the URL query string.
+```javascript
+// Basic usage
+const text = I18n.getText('errors.validation.required');
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+preprocessLocale"></a>
+// With replacements
+const text = I18n.getText('welcome.user', { name: 'John', role: 'admin' });
+```
 
-### i18n.preprocessLocale(locale) ⇒ <code>string</code>
-Normalizes a locale string.
+##### `I18n.get(path, includeCommon)`
+Gets language payload data for a specific path.
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+```javascript
+const formLabels = I18n.get('forms.labels');
+```
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
+##### `I18n.setText(key, element, replacements)`
+Sets internationalized text content on HTML elements.
 
-<a name="I18n+setLocale"></a>
+```javascript
+const button = document.querySelector('#submit-btn');
+I18n.setText('buttons.submit', button, { action: 'save' });
+```
 
-### i18n.setLocale(locale) ⇒ <code>Promise.&lt;Response&gt;</code>
-Sets the locale.
+#### Instance Methods
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+##### `setLocale(locale)`
+Sets the current locale and fetches language data.
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
+```javascript
+await i18n.setLocale('fr');
+```
 
-<a name="I18n+fetchLanguage"></a>
+##### `changeLocale(locale)`
+User-triggered locale change with validation.
 
-### i18n.fetchLanguage(locale) ⇒ <code>Promise.&lt;Response&gt;</code>
-Fetches the language payload from the server.
+```javascript
+try {
+    await i18n.changeLocale('de');
+} catch (error) {
+    console.error('Unsupported locale:', error);
+}
+```
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+##### `getLocale()`
+Returns the current locale, considering URL parameters, stored preferences, and defaults.
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
+```javascript
+const currentLocale = i18n.getLocale(); // 'en'
+```
 
-<a name="I18n+handleFetchPayload"></a>
+##### `supportsLocale(locale, options)`
+Checks if a locale is supported.
 
-### i18n.handleFetchPayload(locale, payload)
-Handles receipt of the language payload from the server.
+```javascript
+const isSupported = i18n.supportsLocale('ja'); // false
+```
+
+### I18nText Web Component
+
+Custom element for declarative internationalization in HTML.
+
+#### Attributes
+
+- `key` - Translation key path
+- `replacements` - Comma-separated key::value pairs for variable substitution
+
+#### Child Elements
+
+- `<i18n-replace name="key">content</i18n-replace>` - Named replacement content
+
+#### Example
+
+```html
+<i18n-text key="notifications.email">
+    <i18n-replace name="count">5</i18n-replace>
+    <i18n-replace name="action"><strong>reply</strong></i18n-replace>
+</i18n-text>
+```
+
+### I18n Utility Tools
+
+#### `parseI18nText(text, returnType)`
+Parses text for i18n key patterns and returns processed content.
+
+```javascript
+import { parseI18nText } from '@arpadroid/i18n';
+
+// Parse text with i18n keys
+const parsed = parseI18nText('Welcome to i18n{app.name}!', 'text');
+// Returns: "Welcome to My App!"
+
+// Generate HTML components
+const html = parseI18nText('Click i18n{buttons.here}', 'html');
+// Returns: 'Click <i18n-text key="buttons.here"></i18n-text>'
+```
+
+#### `renderI18n(key, replacements, attributes)`
+Programmatically creates i18n-text components.
+
+```javascript
+import { renderI18n } from '@arpadroid/i18n';
+
+const component = renderI18n('user.greeting', 
+    { name: 'Alice' }, 
+    { class: 'welcome-text' }
+);
+```
+
+## Configuration
+
+### I18nConfigType
+
+```typescript
+type I18nConfigType = {
+    payload?: LanguagePayloadType;        // Pre-loaded language data
+    locale?: string;                      // Current locale
+    defaultLocale?: string;               // Fallback locale
+    path?: string;                        // Language files path
+    localeOptions?: LocaleOptionType[];   // Available languages
+    urlParam?: string;                    // URL parameter name for locale
+    context?: Record<string, unknown>;    // Additional context data
+};
+```
+
+### LocaleOptionType
+
+```typescript
+type LocaleOptionType = {
+    label: string;     // Display name
+    value: string;     // Locale code
+    flag?: string;     // Flag emoji or icon
+    icon?: string;     // Custom icon
+    country?: string;  // Country name
+    language?: string; // Language name
+    file?: string;     // Custom language file
+};
+```
+
+## Language File Structure
+
+Language files should be JSON objects with nested structures:
+
+```json
+{
+    "common": {
+        "labels": {
+            "submit": "Submit",
+            "cancel": "Cancel",
+            "loading": "Loading..."
+        },
+        "errors": {
+            "required": "This field is required",
+            "invalid": "Invalid {field} format"
+        }
+    },
+    "navigation": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "forms": {
+        "login": {
+            "title": "Sign In",
+            "email": "Email Address",
+            "password": "Password",
+            "submit": "Sign In"
+        }
+    }
+}
+```
+
+## Advanced Usage
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+### Event Handling
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
-| payload | <code>Record.&lt;string, any&gt;</code> | 
+Listen for locale changes:
 
-<a name="I18n+changeLocale"></a>
+```javascript
+const i18n = I18n.getInstance();
 
-### i18n.changeLocale(locale) ⇒ <code>Promise.&lt;Response&gt;</code>
-User action for changing locale.
+i18n.on('locale', ({ locale, payload }) => {
+    console.log(`Language changed to: ${locale}`);
+    // Update UI components
+    updateDateFormats(locale);
+    updateNumberFormats(locale);
+});
+```
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+### Custom Language Loading
 
-| Param | Type |
-| --- | --- |
-| locale | <code>\*</code> | 
+```javascript
+const i18n = I18n.getInstance({
+    path: '/custom/locales',
+    defaultLocale: 'en-US',
+    localeOptions: [
+        { label: 'English (US)', value: 'en-US' },
+        { label: 'English (UK)', value: 'en-GB' },
+        { label: 'Español (México)', value: 'es-MX' }
+    ]
+});
+```
 
-<a name="I18n+setDefaultLocale"></a>
+### URL Parameter Integration
 
-### i18n.setDefaultLocale()
-Sets the locale to the defaultLocale.
+Enable automatic locale detection from URL:
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+storeLocale"></a>
+```javascript
+// URL: https://example.com?language=es
+const i18n = I18n.getInstance({
+    urlParam: 'language', // Reads ?language=es
+    defaultLocale: 'en'
+});
 
-### i18n.storeLocale(locale)
-Saves the language in the local storage.
+// Automatically loads Spanish if URL contains ?language=es
+```
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+### Locale Preprocessing
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
+Built-in locale normalization:
 
-<a name="I18n+getStoredLocale"></a>
+```javascript
+// Automatically maps en-AU to en-GB
+const locale = i18n.preprocessLocale('en-AU'); // Returns 'en-GB'
+```
 
-### i18n.getStoredLocale() ⇒ <code>string</code>
-Returns the language from local storage.
+## Browser Support
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
-<a name="I18n+supportsLocale"></a>
+- Modern browsers with ES6+ support
+- Custom Elements v1
+- Fetch API
+- localStorage
 
-### i18n.supportsLocale(locale, options) ⇒ <code>boolean</code>
-Checks if the given locale is supported by checking against localeOptions.
+## TypeScript
 
-**Kind**: instance method of [<code>I18n</code>](#I18n)  
+Full TypeScript support with comprehensive type definitions:
 
-| Param | Type |
-| --- | --- |
-| locale | <code>string</code> | 
-| options | [<code>Array.&lt;LocaleOptionInterface&gt;</code>](#LocaleOptionInterface) | 
+```typescript
+import { I18n, I18nConfigType, LocaleOptionType } from '@arpadroid/i18n';
 
-<a name="I18n.getInstance"></a>
+const config: I18nConfigType = {
+    defaultLocale: 'en',
+    localeOptions: [
+        { label: 'English', value: 'en' }
+    ]
+};
 
-### I18n.getInstance() ⇒ [<code>I18n</code>](#I18n)
-Returns the instance of the I18n service.
+const i18n = I18n.getInstance(config);
+```
 
-**Kind**: static method of [<code>I18n</code>](#I18n)  
-<a name="I18n.get"></a>
+## Development
 
-### I18n.get(path, includeCommon) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-Gets an entry from the current language payload given a path.
+### Building
 
-**Kind**: static method of [<code>I18n</code>](#I18n)  
+```bash
+npm run build
+```
 
-| Param | Type | Default |
-| --- | --- | --- |
-| path | <code>string</code> |  | 
-| includeCommon | <code>boolean</code> | <code>true</code> | 
+### Testing
 
-<a name="I18n.getPayload"></a>
+```bash
+npm test
+```
 
-### I18n.getPayload(path, payload) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-Gets the locale payload given a path.
+### Documentation
 
-**Kind**: static method of [<code>I18n</code>](#I18n)  
+```bash
+npm run generate-docs
+```
 
-| Param | Type |
-| --- | --- |
-| path | <code>string</code> | 
-| payload | <code>Record.&lt;string, unknown&gt;</code> | 
+## License
 
-<a name="I18n.getDefaultPayload"></a>
+MIT © [Arpadroid](https://github.com/arpadroid)
 
-### I18n.getDefaultPayload(path, payload) ⇒ <code>Record.&lt;string, unknown&gt;</code>
-The default locale payload.
+## Contributing
 
-**Kind**: static method of [<code>I18n</code>](#I18n)  
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-| Param | Type |
-| --- | --- |
-| path | <code>string</code> | 
-| payload | <code>Record.&lt;string, unknown&gt;</code> | 
+## Related Packages
 
-<a name="I18n.addCommonPayload"></a>
-
-### I18n.addCommonPayload(payload, path)
-Adds the 'common' payload to the requested item payload.
-
-**Kind**: static method of [<code>I18n</code>](#I18n)  
-
-| Param | Type |
-| --- | --- |
-| payload | <code>Record.&lt;string, unknown&gt;</code> | 
-| path | <code>string</code> | 
-
-<a name="I18nText"></a>
-
-## I18nText
-Custom element for displaying internationalized text.
-
-**Kind**: global class  
-
-* [I18nText](#I18nText)
-    * _instance_
-        * [.i18n](#I18nText+i18n) : [<code>I18n</code>](#I18n)
-        * [.render()](#I18nText+render)
-        * [.getReplacements()](#I18nText+getReplacements) ⇒ <code>Array</code>
-        * [.doReplacements(text, replacements)](#I18nText+doReplacements) ⇒ <code>string</code>
-    * _static_
-        * [.observedAttributes](#I18nText.observedAttributes) ⇒ <code>Array.&lt;string&gt;</code>
-
-<a name="I18nText+i18n"></a>
-
-### i18nText.i18n : [<code>I18n</code>](#I18n)
-**Kind**: instance property of [<code>I18nText</code>](#I18nText)  
-<a name="I18nText+render"></a>
-
-### i18nText.render()
-Renders the text.
-
-**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
-<a name="I18nText+getReplacements"></a>
-
-### i18nText.getReplacements() ⇒ <code>Array</code>
-Retrieves the replacements from the 'replacements' attribute.
-
-**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
-**Returns**: <code>Array</code> - Array of replacement key-value pairs.  
-<a name="I18nText+doReplacements"></a>
-
-### i18nText.doReplacements(text, replacements) ⇒ <code>string</code>
-Replaces the placeholders in the text with the given replacements.
-
-**Kind**: instance method of [<code>I18nText</code>](#I18nText)  
-**Returns**: <code>string</code> - The text with the replacements.  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| text | <code>string</code> | The text to replace the placeholders in. |
-| replacements | <code>Array</code> | Array of replacement key-value pairs. |
-
-<a name="I18nText.observedAttributes"></a>
-
-### I18nText.observedAttributes ⇒ <code>Array.&lt;string&gt;</code>
-Defines the observed attributes for the element.
-
-**Kind**: static property of [<code>I18nText</code>](#I18nText)  
-**Returns**: <code>Array.&lt;string&gt;</code> - Array of observed attribute names.  
-<a name="signal - Emits a signal."></a>
-
-## signal - Emits a signal.(signalName, payload)
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| signalName | <code>string</code> |  |
-| payload | <code>unknown</code> | The payload to send with the signal. |
-
-<a name="listen - Listens for a signal."></a>
-
-## listen - Listens for a signal.(signalName, callback)
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| signalName | <code>string</code> | The signal to listen for. |
-| callback | <code>function</code> | The callback function. |
-
-<a name="LocaleOptionInterface"></a>
-
-## LocaleOptionInterface : <code>object</code>
-Locale Option interface for the language selection.
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| label | <code>string</code> | The label for the language. |
-| value | <code>string</code> | The value for the language. |
-| [flag] | <code>string</code> | The flag for the language. |
-| [icon] | <code>string</code> | The icon for the language. |
-| [country] | <code>string</code> | The country for the language. |
-| [language] | <code>string</code> | The language for the language. |
-| [file] | <code>string</code> | The file for the language. |
-
-<a name="i18nInterface"></a>
-
-## i18nInterface : <code>object</code>
-The I18n instance configuration.
-
-**Kind**: global typedef  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| [payload] | <code>Record.&lt;string, unknown&gt;</code> | The language payload. |
-| [locale] | <code>string</code> | The currently selected language code. |
-| [defaultLocale] | <code>string</code> | The default language code. |
-| [path] | <code>string</code> | The path to the language files. |
-| localeOptions | <code>Record.&lt;string, LocaleOptionInterface&gt;</code> | Default locale list for user selection. |
-| [urlParam] | <code>string</code> | The URL parameter for the language. |
+- [@arpadroid/tools](https://www.npmjs.com/package/@arpadroid/tools) - Utility functions and helpers
+- [@arpadroid/module](https://www.npmjs.com/package/@arpadroid/module) - Build system and development tools
 

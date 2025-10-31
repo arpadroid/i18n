@@ -1,4 +1,4 @@
-import DEFAULT_LANGUAGE from '../../../test/temp/en.json';
+import DEFAULT_LANGUAGE from '../../i18n/en.json';
 import { attrString } from '@arpadroid/tools';
 import { waitFor, expect, within } from '@storybook/test';
 import I18n from '../../services/i18n';

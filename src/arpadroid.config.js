@@ -1,5 +1,6 @@
 const config = {
     buildTypes: true,
+    buildStyles: false,
     logo: `           ┓    • ┓  •┓┏┓  
   ┏┓┏┓┏┓┏┓┏┫┏┓┏┓┓┏┫  ┓┃┣┫┏┓
   ┗┻┛ ┣┛┗┻┗┻┛ ┗┛┗┗┻  ┗┻┗┛┛┗

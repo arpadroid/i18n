@@ -1,5 +1,6 @@
 bundle-stats.html
 node_modules/
+coverage/
 dist/
 junit.xml
 storybook-static/

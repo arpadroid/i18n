@@ -1,5 +1,7 @@
 const config = {
     buildTypes: true,
+    buildType: 'uiComponent',
+    buildStyles: false,
     logo: `           ┓    • ┓  •┓┏┓  
   ┏┓┏┓┏┓┏┓┏┫┏┓┏┓┓┏┫  ┓┃┣┫┏┓
   ┗┻┛ ┣┛┗┻┗┻┛ ┗┛┗┗┻  ┗┻┗┛┛┗

@@ -3,11 +3,10 @@
  */
 /* eslint-disable security/detect-non-literal-fs-filename */
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
-
+import { glob } from 'glob';
 import path from 'path';
 import { mergeObjects, sortKeys } from '@arpadroid/tools/object';
 
-const { glob } = await import('glob');
 const cwd = process.cwd();
 
 /**

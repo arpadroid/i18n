@@ -1,11 +1,12 @@
 /**
+ * @typedef {import('@arpadroid/module').DependencyProjectPointerType}
  * @typedef {import('@arpadroid/types').Project} Project
  */
 /* eslint-disable security/detect-non-literal-fs-filename */
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { glob } from 'glob';
 import path from 'path';
-import { mergeObjects, sortKeys } from '@arpadroid/tools/object';
+import { mergeObjects, sortKeys } from '@arpadroid/tools';
 
 const cwd = process.cwd();
 
@@ -84,7 +85,7 @@ export async function addCommonFiles(store) {
 /**
  * Compiles i18n files for a project.
  * @param {Project} project
- * @param {string[]} deps
+ * @param {DependencyProjectPointerType[]} deps
  * @returns {Promise<void>}
  */
 export async function compileI18n(project, deps = project.getDependencies()) {

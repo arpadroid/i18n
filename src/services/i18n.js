@@ -138,12 +138,12 @@ class I18n {
 
     /**
      * Gets the locale payload given a path.
-     * @param {string} path
+     * @param {string} [path]
      * @param {LanguagePayloadType} payload
      * @returns {LanguagePayloadType | unknown}
      */
     static getPayload(path, payload = I18n.getInstance()?.payload || {}) {
-        return (!path && payload) || getPropertyValue(path, payload, {});
+        return (!path && payload) || getPropertyValue(path || '', payload, {});
     }
 
     /**

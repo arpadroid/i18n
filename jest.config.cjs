@@ -9,6 +9,8 @@ module.exports = {
     },
     fakeTimers: { enableGlobally: true },
     globals: {},
+    injectGlobals: true,
+    setupFilesAfterEnv: ['<rootDir>/node_modules/@arpadroid/module/src/jest/jest.setup.cjs'],
     transformIgnorePatterns: ['node_modules/(?!@arpadroid/tools)'],
     reporters: [
         'default',

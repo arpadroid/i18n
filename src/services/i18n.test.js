@@ -1,8 +1,3 @@
-/* eslint-disable jsdoc/check-tag-names */
-/**
- * @jest-environment jsdom
- */
-import { jest, expect } from '@jest/globals';
 import I18n from './i18n.js';
 import DEFAULT_LANGUAGE from '../i18n/en.json';
 import { DEFAULT_LANGUAGE_OPTIONS } from '../config/config.js';

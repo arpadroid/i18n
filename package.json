@@ -6,11 +6,12 @@
     "types": "./dist/@types/types.compiled.d.ts",
     "type": "module",
     "scripts": {
-        "build:dev": "arpadroid-build --watch",
+        "watch": "arpadroid-build --watch",
         "build": "arpadroid-build --minify",
         "prepublish": "npm run build",
-        "dev": "arpadroid-build --watch --storybook=6004 --watch",
+        "dev": "arpadroid-build --watch --storybook=6004",
         "test": "arpadroid-test --storybook --jest --port=6004",
+        "test:jest": "../module/node_modules/.bin/jest",
         "clean": "rm -rf ./dist ./node_modules package-lock.json",
         "clean:build": "npm run clean && npm install"
     },
@@ -33,12 +34,13 @@
     "devDependencies": {
         "@babel/core": "^7.23.9",
         "@babel/preset-env": "^7.23.9",
+        "@types/jest": "^30.0.0",
         "babel-jest": "^30.2.0",
         "glob": "^13.0.0",
         "jest-junit": "^16.0.0"
     },
     "peerDependencies": {
-        "@arpadroid/tools": "file:../tools",
-        "@arpadroid/module": "file:../module"
+        "@arpadroid/module": "file:../module",
+        "@arpadroid/tools": "file:../tools"
     }
 }

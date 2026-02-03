@@ -123,7 +123,7 @@ class I18n {
     /**
      * Gets the text from the current language payload given a path.
      * @param {string} path
-     * @param {Record<string, string>} replacements
+     * @param {Record<string, string | number>} replacements
      * @param {LanguagePayloadType} payload
      * @returns {string}
      */
@@ -131,7 +131,7 @@ class I18n {
         let rv = getPropertyValue(path, payload, undefined) || '';
         if (typeof rv !== 'string') return '';
         for (const [key, value] of Object.entries(replacements)) {
-            rv = rv.toString().replace(`{${key}}`, value);
+            rv = rv.toString().replace(`{${key}}`, String(value));
         }
         return rv.toString() || '';
     }

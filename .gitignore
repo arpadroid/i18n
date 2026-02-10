@@ -9,3 +9,4 @@ src/i18n/
 .tsbuildinfo
 tsconfig.tsbuildinfo
 .tmp/
+debug-storybook.log

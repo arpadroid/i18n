@@ -11,6 +11,7 @@
         "prepublish": "npm run build",
         "dev": "arpadroid-build --watch --storybook",
         "test": "arpadroid-test --storybook --jest",
+        "t": "npm run test -- --slim",
         "test:jest": "../module/node_modules/.bin/jest",
         "clean": "arpadroid-clean",
         "clean:build": "npm run clean && npm install"

@@ -1,5 +1,5 @@
 /**
- * @typedef {import('@arpadroid/module').DependencyProjectPointerType}
+ * @typedef {import('@arpadroid/module').DependencyPointerType}
  * @typedef {import('@arpadroid/types').Project} Project
  */
 /* eslint-disable security/detect-non-literal-fs-filename */
@@ -85,7 +85,7 @@ export async function addCommonFiles(store) {
 /**
  * Compiles i18n files for a project.
  * @param {Project} project
- * @param {DependencyProjectPointerType[]} deps
+ * @param {DependencyPointerType[]} deps
  * @returns {Promise<void>}
  */
 export async function compileI18n(project, deps = project.getDependencies()) {

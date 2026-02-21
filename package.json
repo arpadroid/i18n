@@ -2,19 +2,24 @@
     "name": "@arpadroid/i18n",
     "version": "1.0.3",
     "description": "Internationalization module",
-    "exports": "./dist/arpadroid-i18n.js",
+    "exports": {
+        ".": {
+            "types": "./dist/@types/types.compiled.d.ts",
+            "import": "./dist/arpadroid-i18n.js"
+        }
+    },
     "types": "./dist/@types/types.compiled.d.ts",
     "type": "module",
     "scripts": {
         "watch": "arpadroid-build --watch",
         "build": "arpadroid-build --minify",
-        "prepublish": "npm run build",
         "dev": "arpadroid-build --watch --storybook",
         "test": "arpadroid-test --storybook --jest",
         "t": "npm run test -- --slim",
         "test:jest": "../module/node_modules/.bin/jest",
         "clean": "arpadroid-clean",
-        "clean:build": "npm run clean && npm install"
+        "clean:build": "npm run clean && npm install",
+        "check:types": "arpadroid-check-types"
     },
     "repository": {
         "type": "git",
@@ -37,8 +42,11 @@
         "@babel/preset-env": "^7.23.9",
         "@types/jest": "^30.0.0",
         "babel-jest": "^30.2.0",
-        "glob": "^13.0.0",
-        "jest-junit": "^16.0.0"
+        "glob": "^13.0.0"
+    },
+    "overrides": {
+        "minimatch": "10.2.1",
+        "ajv": "8.18.0"
     },
     "peerDependencies": {
         "@arpadroid/module": "file:../module",

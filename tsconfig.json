@@ -4,7 +4,9 @@
         "baseUrl": ".",
         "rootDir": "./src",
         "outDir": "./.tmp/.types",
-        "types": ["node", "jest"]
+        "moduleResolution": "bundler",
+        "types": ["node", "jest"],
+        "skipLibCheck": false
     },
     "include": ["src/**/*", "src/i18n/*.json"],
     "exclude": ["node_modules", "dist"]

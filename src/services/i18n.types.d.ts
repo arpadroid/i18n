@@ -1,3 +1,5 @@
+import I18n from './i18n';
+
 export type LanguagePayloadType = Record<string, unknown> & {
     common?: Record<string, unknown>;
 };

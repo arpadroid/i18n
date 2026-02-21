@@ -4,14 +4,9 @@
  * @typedef {import('@storybook/web-components-vite').StoryContext} StoryContext
  * @typedef {import('@storybook/web-components-vite').Args} Args
  */
-import DEFAULT_LANGUAGE from '../../i18n/en.json';
 import { attrString } from '@arpadroid/tools';
-import I18n from '../../services/i18n';
 import { expect, waitFor } from 'storybook/test';
-
-const i18n = I18n.getInstance({
-    payload: DEFAULT_LANGUAGE
-});
+import { playSetup } from './stories.util.js';
 
 const html = String.raw;
 
@@ -22,7 +17,7 @@ const I18nTextStory = {
     args: {
         key: 'i18n.testComponent.title'
     },
-    render: (/** @type {Args} */ args) => {
+    render: args => {
         return html`<i18n-text ${attrString(args)}>${args.text || ''}</i18n-text>`;
     }
 };
@@ -30,22 +25,15 @@ const I18nTextStory = {
 /** @type {StoryObj} */
 export const Default = {
     name: 'Render',
-    parameters: {},
-
-    playSetup: async (/** @type {StoryContext} */ payload) => {
-        const { canvasElement } = payload;
-        await customElements.whenDefined('i18n-text');
-        const i18nTextNode = canvasElement.querySelector('i18n-text');
-        return { i18nTextNode, i18n };
-    }
+    parameters: {}
 };
 
 /** @type {StoryObj} */
 export const Test = {
-    play: async (/** @type {StoryContext} */ payload) => {
+    play: async payload => {
         const { canvas, step } = payload;
-        const setup = await Default.playSetup(payload);
-        const { i18nTextNode } = setup;
+        const setup = await playSetup(payload);
+        const { i18nTextNode, i18n } = setup;
         await step('Renders the i18n-text component with the corresponding text', async () => {
             expect(i18nTextNode).not.toBeNull();
             await waitFor(() => expect(canvas.getByText('Test Component')).toBeInTheDocument());

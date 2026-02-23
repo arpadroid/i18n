@@ -1,4 +1,4 @@
-import '@arpadroid/module/types/declarations';
+import '@arpadroid/module/types';
 import I18n from './services/i18n';
 
 export * from './services/i18n.types';

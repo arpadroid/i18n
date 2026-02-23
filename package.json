@@ -19,7 +19,8 @@
         "test:jest": "../module/node_modules/.bin/jest",
         "clean": "arpadroid-clean",
         "clean:build": "npm run clean && npm install",
-        "check:types": "arpadroid-check-types"
+        "check:types": "arpadroid-check-types",
+        "initialize": "arpadroid-initialize"
     },
     "repository": {
         "type": "git",

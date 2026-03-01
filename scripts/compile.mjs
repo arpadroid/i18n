@@ -6,7 +6,8 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { glob } from 'glob';
 import path from 'path';
-import { mergeObjects, sortKeys } from '@arpadroid/tools';
+import { mergeObjects, sortKeys } from '@arpadroid/tools-iso';
+import { getAllDependencies } from '@arpadroid/module';
 
 const cwd = process.cwd();
 
@@ -85,17 +86,14 @@ export async function addCommonFiles(store) {
 /**
  * Compiles i18n files for a project.
  * @param {Project} project
- * @param {DependencyPointerType[]} deps
  * @returns {Promise<void>}
  */
-export async function compileI18n(project, deps = project.getDependencies()) {
-    if (!deps.includes('i18n')) return;
+export async function compileI18n(project) {
+    const deps = await getAllDependencies(project);
     const files = [];
     await addCommonFiles(files);
     await addI18nFiles(`${cwd}/src`, project.name, files);
-    await deps.forEach(
-        async dep => await addI18nFiles(`${cwd}/node_modules/@arpadroid/${dep}/src`, dep, files)
-    );
+    await deps.forEach(async dep => await addI18nFiles(`${dep.path}/src`, dep.name, files));
     compileI18nFiles(files);
     return files;
 }

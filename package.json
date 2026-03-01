@@ -51,6 +51,8 @@
     },
     "peerDependencies": {
         "@arpadroid/module": "file:../module",
-        "@arpadroid/tools": "file:../tools"
+        "@arpadroid/logger": "file:../logger",
+        "@arpadroid/tools": "file:../tools",
+        "@arpadroid/tools-iso": "file:../tools-iso"
     }
 }

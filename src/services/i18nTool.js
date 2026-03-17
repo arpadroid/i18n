@@ -48,7 +48,7 @@ export function renderI18n(key, replacements = {}, attributes = {}) {
         ? html`<i18n-text key="${key}" zone="i18n-${name}" ${attrString(attributes)}>
               ${mapHTML(
                   Object.keys(replacements),
-                  (/** @type {string} */  key) => // @ts-ignore
+                  (/** @type {string} */ key) =>
                       html`<i18n-replace name="${key}">${replacements[key]}</i18n-replace>`
               )}
           </i18n-text>`

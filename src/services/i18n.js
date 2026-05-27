@@ -11,11 +11,11 @@ import { dummySignal, dummyListener } from '@arpadroid/tools';
 import { DEFAULT_LANGUAGE_OPTIONS, DEFAULT_LOCALE, LANGUAGES_PATH } from '../config/config.js';
 
 /**
- * @class
- * @mixes {ObserverType}
  * The I18n service class is responsible for managing the application locale.
  * It is used to fetch, store and switch the language.
  * It should be used as a singleton.
+ * @class
+ * @mixes {ObserverType}
  */
 class I18n {
     /** @type {I18n | undefined} */

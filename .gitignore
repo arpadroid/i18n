@@ -10,3 +10,4 @@ src/i18n/
 tsconfig.tsbuildinfo
 .tmp/
 debug-storybook.log
+custom-elements.json

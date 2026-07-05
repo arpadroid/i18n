@@ -39,15 +39,12 @@
     },
     "homepage": "https://github.com/arpadroid/i18n#readme",
     "devDependencies": {
-        "@babel/core": "^7.23.9",
-        "@babel/preset-env": "^7.23.9",
-        "@types/jest": "^30.0.0",
-        "babel-jest": "^30.2.0",
-        "glob": "^13.0.0"
+        "glob": "^13.0.0",
+        "@babel/preset-env": "^8.0.2"
     },
     "peerDependencies": {
-        "@arpadroid/module": "file:../module",
         "@arpadroid/logger": "file:../logger",
+        "@arpadroid/module": "file:../module",
         "@arpadroid/tools": "file:../tools",
         "@arpadroid/tools-iso": "file:../tools-iso"
     }

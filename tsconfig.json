@@ -4,7 +4,6 @@
         "rootDir": "./src",
         "outDir": "./.tmp/.types",
         "moduleResolution": "bundler",
-        "types": ["node", "jest"],
         "skipLibCheck": false
     },
     "include": ["src/**/*", "src/i18n/*.json"],

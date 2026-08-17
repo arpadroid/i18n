@@ -43,7 +43,6 @@
         "@babel/preset-env": "^8.0.2"
     },
     "peerDependencies": {
-        "@arpadroid/logger": "file:../logger",
         "@arpadroid/module": "file:../module",
         "@arpadroid/tools": "file:../tools",
         "@arpadroid/tools-iso": "file:../tools-iso"

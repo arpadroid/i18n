@@ -7,10 +7,10 @@ import I18n from '../../services/i18n.js';
 class I18nText extends HTMLElement {
     constructor() {
         super();
-        /** @type {I18n} */
+        /** @type {import('@arpadroid/tools').ObserverType} */
         this.i18n = I18n.getInstance();
         this.update = this.update.bind(this);
-        this.i18n.on('locale', this.update);
+        this.i18n.on?.('locale', this.update);
         this.replacementNodes = this.querySelectorAll('i18n-replace');
         this.replacementNodes.forEach(node => node.remove());
     }

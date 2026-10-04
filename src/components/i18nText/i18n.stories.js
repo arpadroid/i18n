@@ -2,7 +2,6 @@
  * @typedef {import('@storybook/web-components-vite').Meta} Meta
  * @typedef {import('@storybook/web-components-vite').StoryObj} StoryObj
  * @typedef {import('@storybook/web-components-vite').StoryContext} StoryContext
- * @typedef {import('@storybook/web-components-vite').Args} Args
  */
 import { attrString } from '@arpadroid/tools';
 import { expect, waitFor } from 'storybook/test';
@@ -14,6 +13,7 @@ const html = String.raw;
 const I18nTextStory = {
     title: 'i18n/i18nText',
     tags: [],
+    component: 'i18n-text',
     args: {
         key: 'i18n.testComponent.title'
     },

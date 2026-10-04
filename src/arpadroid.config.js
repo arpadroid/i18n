@@ -2,6 +2,7 @@
 const config = {
     buildTypes: true,
     buildType: 'uiComponent',
+    buildManifest: true,
     buildStyles: false,
     storybook_port: 6004
 };

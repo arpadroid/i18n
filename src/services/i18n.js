@@ -56,6 +56,7 @@ class I18n {
         this.signal = dummySignal;
         this.on = dummyListener;
         observerMixin(this);
+        this._config = {};
         this.setConfig(config);
         if (!this.payload || JSON.stringify(this.payload) === '{}') {
             this._loadDefaultPayload();
@@ -86,6 +87,15 @@ class I18n {
         this._config = mergeObjects(this._defaultConfig, config);
         this.payload = this._config?.payload;
         this.locale = this._config?.locale;
+    }
+
+    /**
+     * Sets the path for the language files.
+     * @param {string} path
+     */
+    setPath(path) {
+        this._config.path = path;
+        this._loadDefaultPayload();
     }
 
     /**
